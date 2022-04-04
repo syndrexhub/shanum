@@ -15,7 +15,7 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 # Link Hosting Kalian
-wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/websocket"
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/websocket"
 
 # Getting Proxy Template
 wget -q -O /usr/local/bin/ws-nontls https://${wisnuvpn}/ws-nontls.py
