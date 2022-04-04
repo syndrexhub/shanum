@@ -45,7 +45,7 @@ commonname=gandringVPN
 email=djarumpentol01@gmail.com
 
 # simple password minimal
-wget -O /etc/pam.d/common-password "https://${akbarvpn}/password"
+wget -O /etc/pam.d/common-password "https://${wisnuvpn}/password"
 chmod +x /etc/pam.d/common-password
 
 # go to root
@@ -99,6 +99,7 @@ apt -y install wget curl
 # Install Requirements Tools
 apt install ruby -y
 apt install privoxy -y
+apt install stunnel4 -y
 apt install python -y
 apt install make -y
 apt install cmake -y
