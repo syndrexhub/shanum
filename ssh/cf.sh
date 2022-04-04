@@ -13,25 +13,13 @@ LIGHT='\033[0;37m'
 # ==========================================
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-IZIN=$( curl https://raw.githubusercontent.com/AkbarStoreVPN/perizinan/main/ipvps.txt | grep $MYIP )
-if [ $MYIP = $IZIN ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin!!"
-echo -e "${NC}${LIGHT}Facebook : https://m.facebook.com/lis.tio.718"
-echo -e "${NC}${LIGHT}WhatsApp : 081545854516"
-echo -e "${NC}${LIGHT}Telegram : https://t.me/Akbar218"
-exit 0
-fi
 clear
 apt install jq curl -y
-DOMAIN=vpnku.tech
-sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-SUB_DOMAIN=${sub}.vpnku.tech
-CF_ID=akbarstore21@yahoo.com
-CF_KEY=1170c2d87638adb12ad8f0f4b8c599c545ada
+DOMAIN=smule.my.id
+sub=$(</dev/urandom tr -dc a-z0-9 | head -c3)
+SUB_DOMAIN=${sub}.smule.my.id
+CF_ID=djarumpentol01@gmail.com
+CF_KEY=5927a0512a815d98fab1debb4e6333e0d6a8c
 set -euo pipefail
 IP=$(wget -qO- ipinfo.io/ip);
 echo "Updating DNS for ${SUB_DOMAIN}..."
