@@ -22,7 +22,7 @@ wget https://github.com/teddysun/xray-plugin/releases/download/v${latest_version
 tar xf xray-plugin-linux-amd64-v${latest_version3}.tar.gz -C /usr/local/bin
 mv /usr/local/bin/xray-plugin_linux_amd64 /usr/local/bin/xray-plugin
 rm -f xray-plugin-linux-amd64-v${latest_version3}.tar.gz
-
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/shadowsocks"
 # creat configfile-folder
 mkdir /etc/shadowsocks-rust >/dev/null 2>&1
 
