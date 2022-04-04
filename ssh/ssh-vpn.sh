@@ -133,8 +133,8 @@ apt install dos2unix -y
 Privoxy_Port1='4000'
 Privoxy_Port2='5000'
 
- # Creating Privoxy server config using cat eof tricks
- cat <<'privoxy' > /etc/privoxy/config
+# Creating Privoxy server config using cat eof tricks
+cat <<'privoxy' > /etc/privoxy/config
 # My Privoxy Server Config
 user-manual /usr/share/doc/privoxy/user-manual
 confdir /etc/privoxy
@@ -291,6 +291,7 @@ chmod +x configure
 ./configure
 make
 make install
+
 cd /root
 rm -r -f stunnel
 rm -f stunnel5.zip
@@ -321,10 +322,10 @@ connect = 127.0.0.1:1194
 END
 
 # make a certificate
-openssl genrsa -out key.pem 2048
-openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
--subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
-cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
+#openssl genrsa -out key.pem 2048
+#openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
+#-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
+#cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
 
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
@@ -405,10 +406,10 @@ echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 
 # Install BBR
-wget https://${akbarvpn}/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+wget https://${wisnuvpn}/bbr.sh && chmod +x bbr.sh && ./bbr.sh
 
 # Ganti Banner
-wget -O /etc/issue.net "https://${akbarvpn}/issue.net"
+wget -O /etc/issue.net "https://${wisnuvpn}/issue.net"
 
 # blockir torrent
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
