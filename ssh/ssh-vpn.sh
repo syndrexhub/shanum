@@ -659,8 +659,7 @@ chmod +x addtrgo
 chmod +x deltrgo
 chmod +x renewtrgo
 chmod +x cektrgo
-echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
-echo "0 0 * * * root xp" >> /etc/crontab
+
 # remove unnecessary files
 cd
 apt autoclean -y
@@ -695,7 +694,8 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7800 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900 --max-clients 500
 history -c
 echo "unset HISTFILE" >> /etc/profile
-
+echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
+echo "0 0 * * * root xp" >> /etc/crontab
 cd
 rm -f /root/key.pem
 rm -f /root/cert.pem
