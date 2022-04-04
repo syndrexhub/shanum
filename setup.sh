@@ -19,25 +19,25 @@ CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
 # Link Hosting Kalian Untuk Ssh Vpn
-wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh"
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh"
 # Link Hosting Kalian Untuk Sstp
-wisnuvpnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/sstp"
+wisnuvpnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/sstp"
 # Link Hosting Kalian Untuk Ssr
-wisnuvpnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssr"
+wisnuvpnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssr"
 # Link Hosting Kalian Untuk Shadowsocks
-wisnuvpnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/shadowsocks"
+wisnuvpnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/shadowsocks"
 # Link Hosting Kalian Untuk Wireguard
-wisnuvpnnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/wireguard"
+wisnuvpnnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/wireguard"
 # Link Hosting Kalian Untuk Xray
-wisnuvpnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/xray"
+wisnuvpnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/xray"
 # Link Hosting Kalian Untuk Ipsec
-wisnuvpnnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ipsec"
+wisnuvpnnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ipsec"
 # Link Hosting Kalian Untuk Backup
-wisnuvpnnnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/backup"
+wisnuvpnnnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/backup"
 # Link Hosting Kalian Untuk Websocket
-wisnuvpnnnnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/websocket"
+wisnuvpnnnnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/websocket"
 # Link Hosting Kalian Untuk Ohp
-wisnuvpnnnnnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ohp"
+wisnuvpnnnnnnnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ohp"
 
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
@@ -133,17 +133,17 @@ echo " 🔰 OHP OpenVPN : 8383" |tee -a log-install.txt
 echo " 🔰 VMESS WS TLS : 2053" |tee -a log-install.txt
 echo " 🔰 VMESS WS NON TLS : 2052" |tee -a log-install.txt
 echo " 🔰 VMESS GRPC : 2052" |tee -a log-install.txt
-echo " 🔰 VMESS H2C : 443" |tee -a log-install.txt
+echo " 🔰 VMESS H2C : 2443" |tee -a log-install.txt
 echo " 🔰 VMESS HTTP : 880" |tee -a log-install.txt
 echo " 🔰 VLESS XTLS : 99" |tee -a log-install.txt
-echo " 🔰 VLESS WS TLS : 443" |tee -a log-install.txt
+echo " 🔰 VLESS WS TLS : 2443" |tee -a log-install.txt
 echo " 🔰 VLESS WS NON TLS : 8880" |tee -a log-install.txt
 echo " 🔰 VLESS GRPC : 8443" |tee -a log-install.txt
 echo " 🔰 VLESS H2C : 8443" |tee -a log-install.txt
 echo " 🔰 TROJAN GO : 2087" |tee -a log-install.txt
-echo " 🔰 TROJAN GRPC : 443" |tee -a log-install.txt
+echo " 🔰 TROJAN GRPC : 2443" |tee -a log-install.txt
 echo " 🔰 TROJAN HTTP : 880" |tee -a log-install.txt
-echo " 🔰 TROJAN H2C : 443" |tee -a log-install.txt
+echo " 🔰 TROJAN H2C : 2443" |tee -a log-install.txt
 echo " 🔰 TROJAN XTLS : 4443" |tee -a log-install.txt
 echo " 🔰 TROJAN WS TLS : 2096" |tee -a log-install.txt
 echo " 🔰 TROJAN WS NON TLS : 2095" |tee -a log-install.txt
