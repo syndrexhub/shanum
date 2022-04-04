@@ -14,16 +14,16 @@ LIGHT='\033[0;37m'
 MYIP=$(wget -qO- ipinfo.io/ip);
 # ==================================================
 # Link Hosting Kalian
-wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh"
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh"
 
 # Link Hosting Kalian Untuk Xray
-wisnuvpnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/xray"
+wisnuvpnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/xray"
 
 # Link Hosting Kalian Untuk Trojan Go
-wisnuvpnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/trojango"
+wisnuvpnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/trojango"
 
 # Link Hosting Kalian Untuk Stunnel5
-wisnuvpnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/stunnel5"
+wisnuvpnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/stunnel5"
 
 # initializing var
 export DEBIAN_FRONTEND=noninteractive
@@ -272,13 +272,13 @@ RUN=yes
 # systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:2082 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:1080 --pidfile /var/run/sslh/sslh.pid -n"
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:2082 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
 
 END
 # Service SSLH systemctl restart sslh
 #cat > /lib/systemd/system/sslh.service << END
 [Unit]
-Description=SSH MULTIPLEXLER CILEGON BANTEN BY WISNU
+Description=SSH MULTIPLEXLER CILEGON BANTEN BY GANDRING
 After=network.target
 Documentation=http://t.me/zerossl
 
@@ -474,7 +474,7 @@ netfilter-persistent reload
 cd /usr/bin
 wget -O addhost "https://${wisnuvpn}/addhost.sh"
 wget -O about "https://${wisnuvpn}/about.sh"
-wget -O menu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/menu.sh"
+wget -O menu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/menu.sh"
 wget -O addssh "https://${wisnuvpn}/addssh.sh"
 wget -O trialssh "https://${wisnuvpn}/trialssh.sh"
 wget -O menuu "https://${wisnuvpn}/menuu.sh"
@@ -580,30 +580,30 @@ wget -O addtrgo "https://${wisnuvpnnn}/addtrgo.sh"
 wget -O deltrgo "https://${wisnuvpnnn}/deltrgo.sh"
 wget -O renewtrgo "https://${wisnuvpnnn}/renewtrgo.sh"
 wget -O cektrgo "https://${wisnuvpnnn}/cektrgo.sh"
-wget -O portsshnontls "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portsshnontls.sh"
-wget -O portsshwstls "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portsshwstls.sh"
-wget -O status "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/status.sh"
-wget -O restart "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/restart.sh"
-wget -O portdropbear "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portdropbear.sh"
-wget -O portopenssh "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portopenssh.sh"
-wget -O addnewtr "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/xray/addnewtr.sh"
+wget -O portsshnontls "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portsshnontls.sh"
+wget -O portsshwstls "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portsshwstls.sh"
+wget -O status "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/status.sh"
+wget -O restart "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/restart.sh"
+wget -O portdropbear "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portdropbear.sh"
+wget -O portopenssh "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portopenssh.sh"
+wget -O addnewtr "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/xray/addnewtr.sh"
 wget -O renewtrojanhdua "https://${wisnuvpnn}/renewtrojanhdua.sh"
-wget -O portstunnel5 "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portstunnel5.sh"
-wget -O trpcwsmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/trpcwsmenu.sh"
-wget -O sshovpnmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/sshovpnmenu.sh"
-#wget -O l2tpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/l2tpmenu.sh"
-wget -O l2tppmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/l2tppmenu.sh"
-#wget -O pptpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/pptpmenu.sh"
-#wget -O sstpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/sstpmenu.sh"
-wget -O wgmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/wgmenu.sh"
-wget -O ssmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/ssmenu.sh"
-#wget -O ssrmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/ssrmenu.sh"
-wget -O vmessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/vmessmenu.sh"
-wget -O vlessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/vlessmenu.sh"
-#wget -O grpcmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/grpcmenu.sh"
-wget -O trghmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/trghmenu.sh"
-wget -O trxtmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/trxtmenu.sh"
-wget -O setmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/setmenu.sh"
+wget -O portstunnel5 "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portstunnel5.sh"
+wget -O trpcwsmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trpcwsmenu.sh"
+wget -O sshovpnmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/sshovpnmenu.sh"
+#wget -O l2tpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/l2tpmenu.sh"
+wget -O l2tppmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/l2tppmenu.sh"
+#wget -O pptpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/pptpmenu.sh"
+#wget -O sstpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/sstpmenu.sh"
+wget -O wgmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/wgmenu.sh"
+wget -O ssmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/ssmenu.sh"
+#wget -O ssrmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/ssrmenu.sh"
+wget -O vmessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/vmessmenu.sh"
+wget -O vlessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/vlessmenu.sh"
+#wget -O grpcmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/grpcmenu.sh"
+wget -O trghmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trghmenu.sh"
+wget -O trxtmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trxtmenu.sh"
+wget -O setmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/setmenu.sh"
 
 chmod +x addnewtr
 chmod +x addnewvmess
