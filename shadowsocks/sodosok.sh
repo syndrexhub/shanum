@@ -16,7 +16,7 @@ LIGHT='\033[0;37m'
 MYIP=$(wget -qO- ipinfo.io/ip);
 
 # Link Hosting Kalian
-wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/master/shadowsocks"
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/shadowsocks"
 
 source /etc/os-release
 OS=$ID
