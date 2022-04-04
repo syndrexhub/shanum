@@ -391,49 +391,167 @@ netfilter-persistent reload
 cd /usr/bin
 wget -O addhost "https://${wisnuvpn}/addhost.sh"
 wget -O about "https://${wisnuvpn}/about.sh"
-wget -O menu "https://${wisnuvpn}/menu.sh"
+wget -O menu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/menu.sh"
 wget -O addssh "https://${wisnuvpn}/addssh.sh"
-wget -O trialssh "https://${akbarvpn}/trialssh.sh"
-wget -O delssh "https://${akbarvpn}/delssh.sh"
-wget -O member "https://${akbarvpn}/member.sh"
-wget -O delexp "https://${akbarvpn}/delexp.sh"
-wget -O cekssh "https://${akbarvpn}/cekssh.sh"
-wget -O restart "https://${akbarvpn}/restart.sh"
-wget -O speedtest "https://${akbarvpn}/speedtest_cli.py"
-wget -O info "https://${akbarvpn}/info.sh"
-wget -O ram "https://${akbarvpn}/ram.sh"
-wget -O renewssh "https://${akbarvpn}/renewssh.sh"
-wget -O autokill "https://${akbarvpn}/autokill.sh"
-wget -O ceklim "https://${akbarvpn}/ceklim.sh"
-wget -O tendang "https://${akbarvpn}/tendang.sh"
-wget -O clearlog "https://${akbarvpn}/clearlog.sh"
-wget -O changeport "https://${akbarvpn}/changeport.sh"
-wget -O portovpn "https://${akbarvpn}/portovpn.sh"
-wget -O portwg "https://${akbarvpn}/portwg.sh"
-wget -O porttrojan "https://${akbarvpn}/porttrojan.sh"
-wget -O portsstp "https://${akbarvpn}/portsstp.sh"
-wget -O portsquid "https://${akbarvpn}/portsquid.sh"
-wget -O portvlm "https://${akbarvpn}/portvlm.sh"
-wget -O wbmn "https://${akbarvpn}/webmin.sh"
-wget -O xp "https://${akbarvpn}/xp.sh"
-wget -O swapkvm "https://${akbarvpn}/swapkvm.sh"
-wget -O addvmess "https://${akbarvpnn}/addv2ray.sh"
-wget -O addvless "https://${akbarvpnn}/addvless.sh"
-wget -O addtrojan "https://${akbarvpnn}/addtrojan.sh"
-wget -O delvmess "https://${akbarvpnn}/delv2ray.sh"
-wget -O delvless "https://${akbarvpnn}/delvless.sh"
-wget -O deltrojan "https://${akbarvpnn}/deltrojan.sh"
-wget -O cekvmess "https://${akbarvpnn}/cekv2ray.sh"
-wget -O cekvless "https://${akbarvpnn}/cekvless.sh"
-wget -O cektrojan "https://${akbarvpnn}/cektrojan.sh"
-wget -O renewvmess "https://${akbarvpnn}/renewv2ray.sh"
-wget -O renewvless "https://${akbarvpnn}/renewvless.sh"
-wget -O renewtrojan "https://${akbarvpnn}/renewtrojan.sh"
-wget -O certv2ray "https://${akbarvpnn}/certv2ray.sh"
-wget -O addtrgo "https://${akbarvpnnn}/addtrgo.sh"
-wget -O deltrgo "https://${akbarvpnnn}/deltrgo.sh"
-wget -O renewtrgo "https://${akbarvpnnn}/renewtrgo.sh"
-wget -O cektrgo "https://${akbarvpnnn}/cektrgo.sh"
+wget -O trialssh "https://${wisnuvpn}/trialssh.sh"
+wget -O menuu "https://${wisnuvpn}/menuu.sh"
+wget -O delssh "https://${wisnuvpn}/delssh.sh"
+wget -O member "https://${wisnuvpn}/member.sh"
+wget -O delexp "https://${wisnuvpn}/delexp.sh"
+wget -O cekssh "https://${wisnuvpn}/cekssh.sh"
+wget -O restart "https://${wisnuvpn}/restart.sh"
+wget -O speedtest "https://${wisnuvpn}/speedtest_cli.py"
+wget -O info "https://${wisnuvpn}/info.sh"
+wget -O ram "https://${wisnuvpn}/ram.sh"
+wget -O renewssh "https://${wisnuvpn}/renewssh.sh"
+wget -O autokill "https://${wisnuvpn}/autokill.sh"
+wget -O ceklim "https://${wisnuvpn}/ceklim.sh"
+wget -O tendang "https://${wisnuvpn}/tendang.sh"
+wget -O clearlog "https://${wisnuvpn}/clearlog.sh"
+wget -O changeport "https://${wisnuvpn}/changeport.sh"
+wget -O portovpn "https://${wisnuvpn}/portovpn.sh"
+wget -O portwg "https://${wisnuvpn}/portwg.sh"
+wget -O porttrojan "https://${wisnuvpn}/porttrojan.sh"
+wget -O porttrojango "https://${wisnuvpn}/porttrojango.sh"
+wget -O portgrpc "https://${wisnuvpn}/portgrpc.sh"
+wget -O portsstp "https://${wisnuvpn}/portsstp.sh"
+wget -O portsquid "https://${wisnuvpn}/portsquid.sh"
+wget -O portvlm "https://${wisnuvpn}/portvlm.sh"
+wget -O wbmn "https://${wisnuvpn}/webmin.sh"
+wget -O xp "https://${wisnuvpn}/xp.sh"
+wget -O swapkvm "https://${wisnuvpn}/swapkvm.sh"
+wget -O addvmess "https://${wisnuvpnn}/addvmess.sh"
+wget -O addnewvmess "https://${wisnuvpnn}/addnewvmess.sh"
+wget -O addnewvless "https://${wisnuvpnn}/addnewvless.sh"
+wget -O addnewtr "https://${wisnuvpnn}/addnewtr.sh"
+wget -O addvmessgrpc "https://${wisnuvpnn}/addvmessgrpc.sh"
+wget -O addvmesshdua "https://${wisnuvpnn}/addvmesshdua.sh"
+wget -O addvmesshttp "https://${wisnuvpnn}/addvmesshttp.sh"
+wget -O addvlessxtls "https://${wisnuvpnn}/addvlessxtls.sh"
+wget -O addvlesshttp "https://${wisnuvpnn}/addvlesshttp.sh"
+wget -O addvlesshdua "https://${wisnuvpnn}/addvlesshdua.sh"
+wget -O addxrayss "https://${wisnuvpnn}/addxrayss.sh"
+wget -O addvless "https://${wisnuvpnn}/addvless.sh"
+wget -O addvlessgrpc "https://${wisnuvpnn}/addvlessgrpc.sh"
+wget -O addtrojan "https://${wisnuvpnn}/addtrojan.sh"
+wget -O addxtlstrojan "https://${wisnuvpnn}/addxtlstrojan.sh"
+wget -O addgrpctrojan "https://${wisnuvpnn}/addgrpctrojan.sh"
+wget -O addtrojanwss "https://${wisnuvpnn}/addtrojanwss.sh"
+wget -O addtrojanhttp "https://${wisnuvpnn}/addtrojanhttp.sh"
+wget -O addtrojanhdua "https://${wisnuvpnn}/addtrojanhdua.sh"
+
+wget -O delvmess "https://${wisnuvpnn}/delvmess.sh"
+wget -O delnewvmess "https://${wisnuvpnn}/delnewvmess.sh"
+wget -O delnewvless "https://${wisnuvpnn}/delnewvless.sh"
+wget -O delnewtr "https://${wisnuvpnn}/delnewtr.sh"
+wget -O delvmessgrpc "https://${wisnuvpnn}/delvmessgrpc.sh"
+wget -O delvmesshdua "https://${wisnuvpnn}/delvmesshdua.sh"
+wget -O delvmesshttp "https://${wisnuvpnn}/delvmesshttp.sh"
+wget -O delvlessxtls "https://${wisnuvpnn}/delvlessxtls.sh"
+wget -O delvlesshttp "https://${wisnuvpnn}/delvlesshttp.sh"
+wget -O delvlesshdua "https://${wisnuvpnn}/delvlesshdua.sh"
+wget -O delxrayss "https://${wisnuvpnn}/delxrayss.sh"
+wget -O delvless "https://${wisnuvpnn}/delvless.sh"
+wget -O delvlessgrpc "https://${wisnuvpnn}/delvlessgrpc.sh"
+wget -O deltrojan "https://${wisnuvpnn}/deltrojan.sh"
+wget -O delxtlstrojan "https://${wisnuvpnn}/delxtlstrojan.sh"
+wget -O delgrpctrojan "https://${wisnuvpnn}/delgrpctrojan.sh"
+wget -O deltrojanwss "https://${wisnuvpnn}/deltrojanwss.sh"
+wget -O deltrojanhdua "https://${wisnuvpnn}/deltrojanhdua.sh"
+
+wget -O deltrojanhttp "https://${wisnuvpnn}/deltrojanhttp.sh"
+wget -O cekvmess "https://${wisnuvpnn}/cekvmess.sh"
+wget -O cekvmessgrpc "https://${wisnuvpnn}/cekvmessgrpc.sh"
+wget -O cekvmesshdua "https://${wisnuvpnn}/cekvmesshdua.sh"
+wget -O cekvmesshttp "https://${wisnuvpnn}/cekvmesshttp.sh"
+wget -O cekvlessxtls "https://${wisnuvpnn}/cekvlessxtls.sh"
+wget -O cekvlesshttp "https://${wisnuvpnn}/cekvlesshttp.sh"
+wget -O cekvlesshdua "https://${wisnuvpnn}/cekvlesshdua.sh"
+wget -O cekxrayss "https://${wisnuvpnn}/cekxrayss.sh"
+wget -O cekvless "https://${wisnuvpnn}/cekvless.sh"
+wget -O cekvlessgrpc "https://${wisnuvpnn}/cekvlessgrpc.sh"
+wget -O cektrojan "https://${wisnuvpnn}/cektrojan.sh"
+wget -O cekxtlstrojan "https://${wisnuvpnn}/cekxtlstrojan.sh"
+wget -O cekgrpctrojan "https://${wisnuvpnn}/cekgrpctrojan.sh"
+wget -O cektrojanwss "https://${wisnuvpnn}/cektrojanwss.sh"
+wget -O cektrojanhttp "https://${wisnuvpnn}/cektrojanhttp.sh"
+
+wget -O renewvmess "https://${wisnuvpnn}/renewvmess.sh"
+wget -O renewvmessgrpc "https://${wisnuvpnn}/renewvmessgrpc.sh"
+wget -O renewvmesshdua "https://${wisnuvpnn}/renewvmesshdua.sh"
+wget -O renewvmesshttp "https://${wisnuvpnn}/renewvmesshttp.sh"
+wget -O renewvlessxtls "https://${wisnuvpnn}/renewvlessxtls.sh"
+wget -O renewvlesshttp "https://${wisnuvpnn}/renewvlesshttp.sh"
+wget -O renewvlesshdua "https://${wisnuvpnn}/renewvlesshdua.sh"
+wget -O renewxrayss "https://${wisnuvpnn}/renewxrayss.sh"
+wget -O renewvless "https://${wisnuvpnn}/renewvless.sh"
+wget -O renewvlessgrpc "https://${wisnuvpnn}/renewvlessgrpc.sh"
+wget -O renewtrojan "https://${wisnuvpnn}/renewtrojan.sh"
+wget -O renewxtlstrojan "https://${wisnuvpnn}/renewxtlstrojan.sh"
+wget -O renewgrpctrojan "https://${wisnuvpnn}/renewgrpctrojan.sh"
+wget -O cektrojanhdua "https://${wisnuvpnn}/cektrojanhdua.sh"
+wget -O renewtrojanwss "https://${wisnuvpnn}/renewtrojanwss.sh"
+wget -O renewtrojanhttp "https://${wisnuvpnn}/renewtrojanhttp.sh"
+wget -O certv2ray "https://${wisnuvpnn}/certv2ray.sh"
+wget -O addtrgo "https://${wisnuvpnnn}/addtrgo.sh"
+wget -O deltrgo "https://${wisnuvpnnn}/deltrgo.sh"
+wget -O renewtrgo "https://${wisnuvpnnn}/renewtrgo.sh"
+wget -O cektrgo "https://${wisnuvpnnn}/cektrgo.sh"
+wget -O portsshnontls "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portsshnontls.sh"
+wget -O portsshwstls "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portsshwstls.sh"
+wget -O status "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/status.sh"
+wget -O restart "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/restart.sh"
+wget -O portdropbear "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portdropbear.sh"
+wget -O portopenssh "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portopenssh.sh"
+wget -O addnewtr "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/xray/addnewtr.sh"
+wget -O renewtrojanhdua "https://${wisnuvpnn}/renewtrojanhdua.sh"
+wget -O portstunnel5 "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portstunnel5.sh"
+wget -O trpcwsmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trpcwsmenu.sh"
+wget -O sshovpnmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/sshovpnmenu.sh"
+#wget -O l2tpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/l2tpmenu.sh"
+wget -O l2tppmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/l2tppmenu.sh"
+#wget -O pptpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/pptpmenu.sh"
+#wget -O sstpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/sstpmenu.sh"
+wget -O wgmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/wgmenu.sh"
+wget -O ssmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/ssmenu.sh"
+#wget -O ssrmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/ssrmenu.sh"
+wget -O vmessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/vmessmenu.sh"
+wget -O vlessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/vlessmenu.sh"
+#wget -O grpcmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/grpcmenu.sh"
+wget -O trghmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trghmenu.sh"
+wget -O trxtmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trxtmenu.sh"
+wget -O setmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/setmenu.sh"
+
+chmod +x addnewtr
+chmod +x addnewvmess
+chmod +x addnewvless
+chmod +x delnewtr
+chmod +x delnewvmess
+chmod +x addnewvless
+chmod +x restart
+chmod +x portdropbear
+chmod +x portopenssh
+chmod +x portstunnel5
+chmod +x status
+chmod +x portsshnontls
+chmod +x portsshwstls
+chmod +x menuu
+chmod +x sshovpnmenu
+#chmod +x l2tpmenu
+chmod +x l2tppmenu
+#chmod +x pptpmenu
+#chmod +x sstpmenu
+chmod +x wgmenu
+chmod +x ssmenu
+
+#chmod +x ssrmenu
+chmod +x vmessmenu
+chmod +x vlessmenu
+#chmod +x grpcmenu
+chmod +x trxtmenu
+chmod +x trpcwsmenu
+chmod +x setmenu
+chmod +x trghmenu
 chmod +x addhost
 chmod +x menu
 chmod +x addssh
@@ -452,28 +570,88 @@ chmod +x ceklim
 chmod +x ram
 chmod +x renewssh
 chmod +x clearlog
+
 chmod +x changeport
 chmod +x portovpn
 chmod +x portwg
 chmod +x porttrojan
+chmod +x porttrojango
+chmod +x portgrpc
 chmod +x portsstp
 chmod +x portsquid
 chmod +x portvlm
+
 chmod +x wbmn
 chmod +x xp
 chmod +x swapkvm
 chmod +x addvmess
+chmod +x addvmessgrpc
+chmod +x addvmesshdua
+chmod +x addvmesshttp
 chmod +x addvless
+chmod +x addvlessgrpc
 chmod +x addtrojan
-chmod +x delv2ray
+chmod +x addvlesshttp
+chmod +x addvlesshdua
+chmod +x addvlessxtls
+chmod +x addxrayss
+chmod +x addxtlstrojan
+chmod +x addgrpctrojan
+chmod +x addtrojanwss
+chmod +x addtrojanhttp
+chmod +x addtrojanhdua
+
+chmod +x delvmess
+chmod +x delvmessgrpc
+chmod +x delvmesshdua
+chmod +x delvmesshttp
 chmod +x delvless
+chmod +x delvlessgrpc
+chmod +x delvlessxtls
+chmod +x delxrayss
 chmod +x deltrojan
-chmod +x cekvmess
-chmod +x cekvless
-chmod +x cektrojan
+chmod +x delvlesshttp
+chmod +x delvlesshdua
+chmod +x delxtlstrojan
+chmod +x delgrpctrojan
+chmod +x deltrojanwss
+chmod +x deltrojanhttp
+chmod +x deltrojanhdua
+
 chmod +x renewvmess
+chmod +x renewvmessgrpc
+chmod +x renewvmesshdua
+chmod +x renewvmesshttp
 chmod +x renewvless
+chmod +x renewvlesshdua
+chmod +x renewvlessgrpc
+chmod +x renewvlessxtls
+chmod +x renewxrayss
 chmod +x renewtrojan
+chmod +x renewvlesshttp
+chmod +x renewxtlstrojan
+chmod +x renewgrpctrojan
+chmod +x renewtrojanwss
+chmod +x renewtrojanhttp
+chmod +x renewtrojanhdua
+
+chmod +x cekvmesshdua
+chmod +x cekvmesshttp
+chmod +x cekvlesshttp
+chmod +x cekvlesshdua
+chmod +x cekvmess
+chmod +x cekvmessgrpc
+chmod +x cekvless
+chmod +x cekvlessgrpc
+chmod +x cekvlessxtls
+chmod +x cekxrayss
+chmod +x cekxtlstrojan
+chmod +x cekgrpctrojan
+chmod +x cektrojanwss
+chmod +x cektrojanhttp
+chmod +x cektrojan
+chmod +x cektrojanhdua
+
 chmod +x certv2ray
 chmod +x addtrgo
 chmod +x deltrgo
