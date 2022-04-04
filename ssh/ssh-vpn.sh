@@ -177,8 +177,8 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 
 # install
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
-echo "clear" >> .profile
-echo "neofetch" >> .profile
+#echo "clear" >> .profile
+#echo "neofetch" >> .profile
 echo "status" >> .profile
 # install webserver
 apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
@@ -299,7 +299,7 @@ MyStunnelD
  rm -rf /etc/stunnel/*
  
  # Creating stunnel certifcate using openssl
- openssl req -new -x509 -days 9999 -nodes -subj "/C=ID/ST=Jawa_Tengah/L=Sukoharjo/O=GandrinGVPN/OU=gandring/CN=GandrinGVPN" -out /etc/stunnel/stunnel.pem -keyout /etc/stunnel/stunnel.pem &> /dev/null
+openssl req -new -x509 -days 9999 -nodes -subj "/C=ID/ST=Jawa_Tengah/L=Sukoharjo/O=GandrinGVPN/OU=gandring/CN=GandrinGVPN" -out /etc/stunnel/stunnel.pem -keyout /etc/stunnel/stunnel.pem &> /dev/null
 ##  > /dev/null 2>&1
 
  # Creating stunnel server config
