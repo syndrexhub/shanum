@@ -13,19 +13,7 @@ LIGHT='\033[0;37m'
 # ==========================================
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-IZIN=$( curl https://raw.githubusercontent.com/AkbarStoreVPN/perizinan/main/ipvps.txt | grep $MYIP )
-if [ $MYIP = $IZIN ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin!!"
-echo -e "${NC}${LIGHT}Facebook : https://m.facebook.com/lis.tio.718"
-echo -e "${NC}${LIGHT}WhatsApp : 081545854516"
-echo -e "${NC}${LIGHT}Telegram : https://t.me/Akbar218"
-exit 0
-fi
-source /var/lib/akbarstorevpn/ipvps.conf
+source /var/lib/wisnucs/ipvps.conf
 if [[ "$IP2" = "" ]]; then
 domain=$(cat /etc/xray/domain)
 else
@@ -72,9 +60,9 @@ echo -e "Ovpn Ws       : 2086"
 echo -e "Port TCP      : $ovpn"
 echo -e "Port UDP      : $ovpn2"
 echo -e "Port SSL      : 990"
-echo -e "OVPN TCP      : http://$IP:89/tcp.ovpn"
-echo -e "OVPN UDP      : http://$IP:89/udp.ovpn"
-echo -e "OVPN SSL      : http://$IP:89/ssl.ovpn"
+echo -e "OVPN TCP      : http://$MYIP:88/tcp.ovpn"
+echo -e "OVPN UDP      : http://$MYIP:88/udp.ovpn"
+echo -e "OVPN SSL      : http://$MYIP:88/ssl.ovpn"
 echo -e "BadVpn        : 7100-7200-7300"
 echo -e "Created       : $hariini"
 echo -e "Expired       : $expi"
