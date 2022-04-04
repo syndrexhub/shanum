@@ -1,6 +1,4 @@
 #!/bin/bash
-# By Akbar Maulana
-# My Telegram : https://t.me/Akbar218
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -16,16 +14,16 @@ LIGHT='\033[0;37m'
 MYIP=$(wget -qO- ipinfo.io/ip);
 # ==================================================
 # Link Hosting Kalian
-wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh"
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh"
 
 # Link Hosting Kalian Untuk Xray
-wisnuvpnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/xray"
+wisnuvpnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/xray"
 
 # Link Hosting Kalian Untuk Trojan Go
-wisnuvpnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/trojango"
+wisnuvpnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/trojango"
 
 # Link Hosting Kalian Untuk Stunnel5
-wisnuvpnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/stunnel5"
+wisnuvpnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/stunnel5"
 
 # initializing var
 export DEBIAN_FRONTEND=noninteractive
@@ -36,12 +34,12 @@ source /etc/os-release
 ver=$VERSION_ID
 
 #detail nama perusahaan
-country=ID
-state=Jawa-Tengah
-locality=Sukoharjo
-organization=gandringVPN
-organizationalunit=gandring
-commonname=gandringVPN
+country=US
+state=California
+locality=San-Fransisco
+organization=Cloudflare
+organizationalunit=www.cloudflare.com
+commonname=Cloudflare-Inc.
 email=djarumpentol01@gmail.com
 
 # simple password minimal
@@ -56,6 +54,7 @@ cat > /etc/systemd/system/rc-local.service <<-END
 [Unit]
 Description=/etc/rc.local
 ConditionPathExists=/etc/rc.local
+
 [Service]
 Type=forking
 ExecStart=/etc/rc.local start
@@ -63,9 +62,11 @@ TimeoutSec=0
 StandardOutput=tty
 RemainAfterExit=yes
 SysVStartPriority=99
+
 [Install]
 WantedBy=multi-user.target
 END
+
 
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
@@ -92,17 +93,22 @@ apt upgrade -y
 apt dist-upgrade -y
 apt-get remove --purge ufw firewalld -y
 apt-get remove --purge exim4 -y
+apt-get purge apache2* -y
+rm -rf /etc/apache2
 
 # install wget and curl
 apt -y install wget curl
 
 # Install Requirements Tools
 apt install ruby -y
-apt install privoxy -y
-apt install stunnel4 -y
 apt install python -y
+apt install privoxy -y
 apt install make -y
+apt install cowsay -y
+apt install figlet -y
+apt install lolcat -y
 apt install cmake -y
+apt install ncurses-utils -y
 apt install coreutils -y
 apt install rsyslog -y
 apt install net-tools -y
@@ -129,13 +135,20 @@ apt install libreadline-dev -y
 apt install zlib1g-dev -y
 apt install libssl-dev -y
 apt install libssl1.0-dev -y
-apt install dos2unix -y
+gem install lolcat
+apt install jq curl -y
+apt install dnsutils jq -y
+apt-get install net-tools -y
+apt-get install tcpdump -y
+apt-get install dsniff -y
+apt install grepcidr -y
+
 # Privoxy Ports
 Privoxy_Port1='4000'
 Privoxy_Port2='5000'
 
-# Creating Privoxy server config using cat eof tricks
-cat <<'privoxy' > /etc/privoxy/config
+ # Creating Privoxy server config using cat eof tricks
+ cat <<'privoxy' > /etc/privoxy/config
 # My Privoxy Server Config
 user-manual /usr/share/doc/privoxy/user-manual
 confdir /etc/privoxy
@@ -174,16 +187,17 @@ ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
+mkdir /etc/ssl/zerossl.my.id/
 
 # install
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
-#echo "clear" >> .profile
 #echo "neofetch" >> .profile
 echo "status" >> .profile
+
 # install webserver
 apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
+rm /etc/nginx/sites-enabled/
+rm /etc/nginx/sites-available/
 curl https://${wisnuvpn}/nginx.conf > /etc/nginx/nginx.conf
 curl https://${wisnuvpn}/vps.conf > /etc/nginx/conf.d/vps.conf
 sed -i 's/listen = \/var\/run\/php-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/fpm/pool.d/www.conf
@@ -193,7 +207,7 @@ echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
 chown -R www-data:www-data /home/vps/public_html
 chmod -R g+rw /home/vps/public_html
 cd /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://${wisnuvpn}/index.html1"
+wget -O /home/vps/public_html/index.html "https://${wisnuvpn}/index.html"
 /etc/init.d/nginx restart
 cd
 
@@ -211,8 +225,15 @@ sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7700 --max-c
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7800 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900 --max-clients 500' /etc/rc.local
 
+make a certificate
+openssl genrsa -out key.pem 4096
+openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
+-subj "/C=US/ST=California/L=San-Fransisco/O=Cloudflare-Inc./OU=www.cloudflare.com/CN=smule.my.id/email=djarumpentol01@gmail.com"
+cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
+
 # setting port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
+sed -i 's/Port 2525/g' /etc/ssh/sshd_config
 
 # install dropbear
 apt -y install dropbear
@@ -232,7 +253,6 @@ sed -i $MYIP2 /etc/squid/squid.conf
 # Install SSLH
 apt -y install sslh
 rm -f /etc/default/sslh
-
 # Settings SSLH
 cat > /etc/default/sslh <<-END
 # Default options for sslh initscript
@@ -252,8 +272,23 @@ RUN=yes
 # systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:2082 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:2082 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:1080 --pidfile /var/run/sslh/sslh.pid -n"
 
+END
+# Service SSLH systemctl restart sslh
+#cat > /lib/systemd/system/sslh.service << END
+[Unit]
+Description=SSH MULTIPLEXLER CILEGON BANTEN BY WISNU
+After=network.target
+Documentation=http://t.me/zerossl
+
+[Service]
+EnvironmentFile=/etc/default/sslh
+ExecStart=/usr/sbin/sslh --foreground $DAEMON_OPTS
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
 END
 
 # Restart Service SSLH
@@ -280,54 +315,100 @@ systemctl enable vnstat
 rm -f /root/vnstat-2.6.tar.gz
 rm -rf /root/vnstat-2.6
 
-function InsStunnel(){
- StunnelDir=$(ls /etc/default | grep stunnel | head -n1)
+# install stunnel 5 
+cd /root/
+wget -q -O stunnel5.zip "https://${wisnuvpnnnn}/stunnel5.zip"
+unzip -o stunnel5.zip
+cd /root/stunnel
+chmod +x configure
+./configure
+make
+make install
+cd /root
+rm -r -f stunnel
+rm -f stunnel5.zip
+mkdir -p /etc/stunnel5
+chmod 644 /etc/stunnel5
 
- # Creating stunnel startup config using cat eof tricks
-cat > /etc/stunnel/stunnel.conf << END
-# My Stunnel Config
-ENABLED=1
-FILES="/etc/stunnel/stunnel.conf"
-OPTIONS=""
-BANNER="/etc/issue.net"
-PPP_RESTART=0
-# RLIMITS="-n 4096 -d unlimited"
-RLIMITS=""
-MyStunnelD
+# Download Config Stunnel5
+cat > /etc/stunnel5/stunnel5.conf <<-END
+cert= /etc/xray/xray.crt
+key= /etc/xray/xray.key
+#cert= /etc/stunnel5/stunel5.pem
 
- # Removing all stunnel folder contents
- rm -rf /etc/stunnel/*
- 
- # Creating stunnel certifcate using openssl
-openssl req -new -x509 -days 9999 -nodes -subj "/C=ID/ST=Jawa_Tengah/L=Sukoharjo/O=GandrinGVPN/OU=gandring/CN=GandrinGVPN" -out /etc/stunnel/stunnel.pem -keyout /etc/stunnel/stunnel.pem &> /dev/null
-##  > /dev/null 2>&1
-
- # Creating stunnel server config
-cat > /etc/stunnel/stunnel.conf << END
-# My Stunnel Config
-pid = /var/run/stunnel.pid
-cert = /etc/stunnel/stunnel.pem
 client = no
+socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
-TIMEOUTclose = 0
+
+[dropbear]
+accept = 600
+connect = 127.0.0.1:200
 
 [dropbear]
 accept = 700
 connect = 127.0.0.1:300
 
 [openssh]
-accept = 600
+accept = 800
 connect = 127.0.0.1:22
 
-[ws-stunnel]
+[openssh]
 accept = 500
 connect = 127.0.0.1:2082
 
 [openvpn]
 accept = 990
 connect = 127.0.0.1:1194
+
 END
+
+make a certificate
+openssl genrsa -out key.pem 2048
+openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
+-subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
+cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
+
+# Service Stunnel5 systemctl restart stunnel5
+cat > /etc/systemd/system/stunnel5.service << END
+[Unit]
+Description=STUNNEL5 ROUTING GAJAH DEMAK BY WISNU
+Documentation=https://stunnel5.org
+Documentation=https://t.me/zerossl
+After=syslog.target network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
+END
+
+# Service Stunnel5 /etc/init.d/stunnel5
+wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
+
+# Ubah Izin Akses
+chmod 600 /etc/stunnel5/stunnel5.pem
+chmod +x /etc/init.d/stunnel5
+cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
+
+# Remove File
+rm -r -f /usr/local/share/doc/stunnel/
+rm -r -f /usr/local/etc/stunnel/
+rm -f /usr/local/bin/stunnel
+#rm -f /usr/local/bin/stunnel3
+rm -f /usr/local/bin/stunnel4
+#rm -f /usr/local/bin/stunnel5
+
+# Restart Stunnel 5
+systemctl stop stunnel5
+systemctl enable stunnel5
+systemctl start stunnel5
+systemctl restart stunnel5
+/etc/init.d/stunnel5 restart
+/etc/init.d/stunnel5 status
+/etc/init.d/stunnel5 restart
 
 #OpenVPN
 wget https://${wisnuvpn}/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
@@ -393,7 +474,7 @@ netfilter-persistent reload
 cd /usr/bin
 wget -O addhost "https://${wisnuvpn}/addhost.sh"
 wget -O about "https://${wisnuvpn}/about.sh"
-wget -O menu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/menu.sh"
+wget -O menu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/menu.sh"
 wget -O addssh "https://${wisnuvpn}/addssh.sh"
 wget -O trialssh "https://${wisnuvpn}/trialssh.sh"
 wget -O menuu "https://${wisnuvpn}/menuu.sh"
@@ -499,30 +580,30 @@ wget -O addtrgo "https://${wisnuvpnnn}/addtrgo.sh"
 wget -O deltrgo "https://${wisnuvpnnn}/deltrgo.sh"
 wget -O renewtrgo "https://${wisnuvpnnn}/renewtrgo.sh"
 wget -O cektrgo "https://${wisnuvpnnn}/cektrgo.sh"
-wget -O portsshnontls "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portsshnontls.sh"
-wget -O portsshwstls "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portsshwstls.sh"
-wget -O status "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/status.sh"
-wget -O restart "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/restart.sh"
-wget -O portdropbear "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portdropbear.sh"
-wget -O portopenssh "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portopenssh.sh"
-wget -O addnewtr "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/xray/addnewtr.sh"
+wget -O portsshnontls "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portsshnontls.sh"
+wget -O portsshwstls "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portsshwstls.sh"
+wget -O status "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/status.sh"
+wget -O restart "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/restart.sh"
+wget -O portdropbear "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portdropbear.sh"
+wget -O portopenssh "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portopenssh.sh"
+wget -O addnewtr "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/xray/addnewtr.sh"
 wget -O renewtrojanhdua "https://${wisnuvpnn}/renewtrojanhdua.sh"
-wget -O portstunnel5 "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portstunnel5.sh"
-wget -O trpcwsmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trpcwsmenu.sh"
-wget -O sshovpnmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/sshovpnmenu.sh"
-#wget -O l2tpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/l2tpmenu.sh"
-wget -O l2tppmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/l2tppmenu.sh"
-#wget -O pptpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/pptpmenu.sh"
-#wget -O sstpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/sstpmenu.sh"
-wget -O wgmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/wgmenu.sh"
-wget -O ssmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/ssmenu.sh"
-#wget -O ssrmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/ssrmenu.sh"
-wget -O vmessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/vmessmenu.sh"
-wget -O vlessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/vlessmenu.sh"
-#wget -O grpcmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/grpcmenu.sh"
-wget -O trghmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trghmenu.sh"
-wget -O trxtmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trxtmenu.sh"
-wget -O setmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/setmenu.sh"
+wget -O portstunnel5 "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portstunnel5.sh"
+wget -O trpcwsmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/trpcwsmenu.sh"
+wget -O sshovpnmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/sshovpnmenu.sh"
+#wget -O l2tpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/l2tpmenu.sh"
+wget -O l2tppmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/l2tppmenu.sh"
+#wget -O pptpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/pptpmenu.sh"
+#wget -O sstpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/sstpmenu.sh"
+wget -O wgmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/wgmenu.sh"
+wget -O ssmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/ssmenu.sh"
+#wget -O ssrmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/ssrmenu.sh"
+wget -O vmessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/vmessmenu.sh"
+wget -O vlessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/vlessmenu.sh"
+#wget -O grpcmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/grpcmenu.sh"
+wget -O trghmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/trghmenu.sh"
+wget -O trxtmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/trxtmenu.sh"
+wget -O setmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/setmenu.sh"
 
 chmod +x addnewtr
 chmod +x addnewvmess
@@ -681,8 +762,9 @@ chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/sslh restart
 /etc/init.d/stunnel5 restart
 /etc/init.d/vnstat restart
-/etc/init.d/fail2ban restart
-/etc/init.d/squid restart
+#/etc/init.d/fail2ban restart
+#/etc/init.d/squid restart
+
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
@@ -692,14 +774,15 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7600 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7700 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7800 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900 --max-clients 500
-history -c
-echo "unset HISTFILE" >> /etc/profile
 echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
 echo "0 0 * * * root xp" >> /etc/crontab
+history -c
+echo "unset HISTFILE" >> /etc/profile
+
 cd
 rm -f /root/key.pem
 rm -f /root/cert.pem
 rm -f /root/ssh-vpn.sh
 
-# finihsing
+# finishing
 clear
