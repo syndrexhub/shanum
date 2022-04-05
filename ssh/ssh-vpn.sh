@@ -330,7 +330,7 @@ Documentation=https://t.me/zerossl
 After=syslog.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/stunnel /etc/stunnel5/stunnel5.conf
+ExecStart=/usr/local/bin/stunnel5 -config /etc/stunnel5/stunnel5.conf
 Type=forking
 
 [Install]
