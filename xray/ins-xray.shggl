@@ -691,6 +691,13 @@ cat > /etc/xray/xtrojan.json << END
   },
   "inbounds": [
     {
+  "log": {
+    "access": "/var/log/xray/access.log",
+    "error": "/var/log/xray/error.log",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
       "port": 5443,
       "protocol": "trojan",
       "tag": "TROJAN-xtls-in",
@@ -701,7 +708,7 @@ cat > /etc/xray/xtrojan.json << END
             "flow": "xtls-rprx-direct",
             "email": "gandring@p0x.smule.my.id",
             "level": 0
-            #trojan-xtls
+#trojan-xtls
           }
         ],
         "decryption": "none",
@@ -744,13 +751,27 @@ cat > /etc/xray/xtrojan.json << END
           {
             "password": "gandring",
             "email": "gandring@p0x.smule.my.id"
-            #trojan-grpc
+#trojan-grpc
           }
         ],
         "decryption": "none"
       },
       "streamSettings": {
         "network": "grpc",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "",
+          "alpn": [
+            "http",
+            "tls"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ]
+        },
         "grpcSettings": {
           "serviceName": "gandring"
         }
@@ -766,7 +787,42 @@ cat > /etc/xray/xtrojan.json << END
           {
             "password": "gandring",
             "email": "gandring@p0x.smule.my.id"
-            #trojan-tls
+#trojan-tls
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "wsSettings": {
+          "path": "gandring"
+         },
+         "tlsSettings": {
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "port": 2095,
+      "listen": "0.0.0.0",
+      "protocol": "trojan",
+      "tag": "TROJAN-WS-in",
+      "settings": {
+        "clients": [
+          {
+            "password": "gandring",
+            "email": "gandring@p0x.smule.my.id"
+#trojan-nontls
           }
         ],
         "decryption": "none"
@@ -783,22 +839,125 @@ cat > /etc/xray/xtrojan.json << END
       "port": 2095,
       "listen": "0.0.0.0",
       "protocol": "trojan",
-      "tag": "TROJAN-WS-in",
+      "tag": "TROJAN-HTTP/2-in",
       "settings": {
         "clients": [
           {
             "password": "gandring",
             "email": "gandring@p0x.smule.my.id"
-            #trojan-nontls
+#trojan-hdua
           }
         ],
         "decryption": "none"
       },
       "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-          "path": "/gandring"
+        "network": "h2",
+        "security": "tls",
+        "httpSettings": {
+          "path": "gandring"
+         },
+         "tlsSettings": {
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "port": 2022,
+      "listen": "0.0.0.0",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "gandring"
+            "email": "gandring@p0x.smule.my.id"
+#vless-hdua
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "h2",
+        "security": "tls",
+        "httpSettings": {
+          "path": "gandring"
+         },
+         "tlsSettings": {
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "port": 2022,
+      "listen": "0.0.0.0",
+      "tag": "vless-http-in",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "gandring"
+            "email": "gandring@p0x.smule.my.id"
+#vless-http
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {
+          "header": {
+            "type": "http",
+            "response": {
+              "version": "1.1",
+              "status": "200",
+              "reason": "OK",
+              "headers": {
+                "Content-Type": [
+                  "application/octet-stream",
+                  "video/mpeg",
+                  "application/x-msdownload",
+                  "text/html",
+                  "application/x-shockwave-flash"
+                ],
+                "Transfer-Encoding": [
+                  "chunked"
+                ],
+                "Connection": [
+                  "keep-alive"
+                ],
+                "Pragma": "no-cache"
+              }
+            }
+          }
+        },
+        "security": "tls"
+         "tlsSettings": {
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ]
         }
       }
     },
@@ -812,7 +971,7 @@ cat > /etc/xray/xtrojan.json << END
           {
             "password": "gandring",
             "email": "gandring@p0x.smule.my.id"
-            #trojan-http
+#trojan-http
           }
         ],
         "decryption": "none"
@@ -947,6 +1106,8 @@ iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 333 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 333 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 880 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 880 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2022 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2022 -j ACCEPT
 iptables-save > /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
