@@ -96,8 +96,11 @@ apt-get remove --purge ufw firewalld -y
 apt-get remove --purge exim4 -y
 
 # install wget and curl
-apt -y install wget curl
-
+apt -y install wget
+apt install curl -y
+apt install netcat -y
+apt install python-pip -y
+apt install socat -y
 # Install Requirements Tools
 apt install ruby -y
 apt install python -y
@@ -132,9 +135,8 @@ apt install libssl-dev -y
 apt install libssl1.0-dev -y
 apt install dos2unix -y
 
-
  # Creating Privoxy server config using cat eof tricks
- cat <<'privoxy' > /etc/privoxy/config
+cat <<'privoxy' > /etc/privoxy/config
 # My Privoxy Server Config
 user-manual /usr/share/doc/privoxy/user-manual
 confdir /etc/privoxy
@@ -308,6 +310,10 @@ socket = r:TCP_NODELAY=1
 [dropbear]
 accept = 445
 connect = 127.0.0.1:109
+
+[openssh]
+accept = 500
+connect = 127.0.0.1:22
 
 [openssh]
 accept = 777
