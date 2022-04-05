@@ -101,7 +101,7 @@ cat > /etc/xray/config.json << END
           {
             "id": "${uuid}",
             "flow": "xtls-rprx-direct"
-            #vless-xtls
+#vless-xtls
           }
         ],
         "decryption": "none",
@@ -149,7 +149,7 @@ cat > /etc/xray/config.json << END
           {
             "id": "${uuid}",
             "alterId": 0
-            #vmess-http
+#vmess-http
           }
         ]
       },
@@ -230,7 +230,7 @@ cat > /etc/xray/config.json << END
           {
             "id": "${uuid}",
             "alterId": 0
-            #vmess-tls
+#vmess-tls
           }
         ]
       },
@@ -273,7 +273,7 @@ cat > /etc/xray/config.json << END
           {
             "id": "${uuid}",
             "alterId": 0
-            #vmess-nontls
+#vmess-nontls
           }
         ]
       },
@@ -308,7 +308,7 @@ cat > /etc/xray/config.json << END
           {
             "id": "${uuid}",
             "alterId": 0
-            #vmess-hdua
+#vmess-hdua
           }
         ]
       },
@@ -348,7 +348,7 @@ cat > /etc/xray/config.json << END
           {
             "id": "${uuid}",
             "alterId": 0
-            #vmess-grpc
+#vmess-grpc
           }
         ]
       },
@@ -392,7 +392,7 @@ cat > /etc/xray/config.json << END
         "clients": [
           {
             "id": "${uuid}"
-            #vless-tls
+#vless-tls
           }
         ],
         "decryption": "none"
@@ -438,7 +438,7 @@ cat > /etc/xray/config.json << END
         "clients": [
           {
             "id": "${uuid}"
-            #vless-nontls
+#vless-nontls
           }
         ],
         "decryption": "none"
@@ -473,7 +473,7 @@ cat > /etc/xray/config.json << END
         "clients": [
           {
             "id": "${uuid}"
-            #vless-grpc
+#vless-grpc
           }
         ],
         "decryption": "none"
@@ -516,7 +516,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "method": "aes-256-gcm",
         "password": "gandring",
-        #xray-shadowsocks
+#xray-ss
         "network": "tcp,udp"
       },
       "sniffing": {
@@ -536,7 +536,7 @@ cat > /etc/xray/config.json << END
           {
             "user": "gandring",
             "pass": "gandring"
-            #xray-socks
+#xray-socks
           }
         ],
         "udp": true
@@ -567,6 +567,7 @@ cat > /etc/xray/config.json << END
         "clients": [
           {
             "password": "gandring"
+#xray-trojan
           }
         ],
         "fallbacks": [
