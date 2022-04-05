@@ -54,8 +54,6 @@ SysVStartPriority=99
 [Install]
 WantedBy=multi-user.target
 END
-
-
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
 #!/bin/sh -e
@@ -83,10 +81,7 @@ apt-get remove --purge ufw firewalld -y
 apt-get remove --purge exim4 -y
 apt-get purge apache2* -y
 rm -rf /etc/apache2
-
-# install wget and curl
 apt -y install wget curl
-
 # Install Requirements Tools
 apt install ruby -y
 apt install python -y
