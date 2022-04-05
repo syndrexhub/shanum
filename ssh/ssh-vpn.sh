@@ -235,8 +235,8 @@ apt -y install sslh
 rm -f /etc/default/sslh
 # Settings SSLH
 cat > /etc/default/sslh <<-END
-# Default options for sslh initscript
-# sourced by /etc/init.d/sslh
+Default options for sslh initscript
+sourced by /etc/init.d/sslh
 
 # Disabled by default, to force yourself
 # to read the configuration:
@@ -256,7 +256,7 @@ DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:500 --ssh 127.0.0.
 
 END
 # Service SSLH systemctl restart sslh
-cat > /etc/systemd/system/sslh.service << END
+cat > /lib/systemd/system/sslh.service << END
 [Unit]
 Description=SSH MULTIPLEXLER CILEGON BANTEN BY GANDRING
 After=network.target
@@ -272,7 +272,7 @@ WantedBy=multi-user.target
 END
 
 # Restart Service SSLH
-service sslh restart
+systemctl daemon-reload
 systemctl restart sslh
 /etc/init.d/sslh restart
 /etc/init.d/sslh status
@@ -310,15 +310,10 @@ rm -f stunnel5.zip
 mkdir -p /etc/stunnel5
 chmod 644 /etc/stunnel5
 
-#make a certificate
-openssl genrsa -out key.pem 2048
-openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
--subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
-cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
-cert=/etc/stunnel5/stunnel5.pem
-cert=/etc/stunnel5/stunel5.pem
 # Download Config Stunnel5
 cat > /etc/stunnel5/stunnel5.conf <<-END
+cert.pem=/etc/xray/xray.crt
+key.pem=/etc/xray/xray.key
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
@@ -363,7 +358,13 @@ END
 
 # Service Stunnel5 /etc/init.d/stunnel5
 wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
-
+#make a certificate
+#openssl genrsa -out key.pem 2048
+#openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
+#-subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
+#cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
+#cert.pem=/etc/stunnel5/stunnel5.pem
+#key.pem=/etc/stunnel5/stunnel5.pem
 # Ubah Izin Akses
 chmod 600 /etc/stunnel5/stunnel5.pem
 chmod +x /etc/init.d/stunnel5
@@ -378,6 +379,7 @@ rm -f /usr/local/bin/stunnel4
 rm -f /usr/local/bin/stunnel5
 
 # Restart Stunnel 5
+systemctl daemon-reload
 systemctl stop stunnel5
 systemctl enable stunnel5
 systemctl start stunnel5
@@ -726,7 +728,7 @@ apt-get -y --purge remove apache2*;
 apt-get -y --purge remove bind9*;
 apt-get -y remove sendmail*
 apt autoremove -y
-# finishing
+
 cd
 chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/nginx restart
