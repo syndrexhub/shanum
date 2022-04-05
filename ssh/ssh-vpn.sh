@@ -233,10 +233,11 @@ sed -i $MYIP2 /etc/squid/squid.conf
 # Install SSLH
 apt -y install sslh
 rm -f /etc/default/sslh
+
 # Settings SSLH
 cat > /etc/default/sslh <<-END
-Default options for sslh initscript
-sourced by /etc/init.d/sslh
+# Default options for sslh initscript
+# sourced by /etc/init.d/sslh
 
 # Disabled by default, to force yourself
 # to read the configuration:
@@ -255,24 +256,9 @@ DAEMON=/usr/sbin/sslh
 DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
 
 END
-# Service SSLH systemctl restart sslh
-cat > /lib/systemd/system/sslh.service << END
-[Unit]
-Description=SSH MULTIPLEXLER CILEGON BANTEN BY GANDRING
-After=network.target
-Documentation=http://t.me/zerossl
-
-[Service]
-EnvironmentFile=/etc/default/sslh
-ExecStart=/usr/sbin/sslh --foreground $DAEMON_OPTS
-KillMode=process
-
-[Install]
-WantedBy=multi-user.target
-END
 
 # Restart Service SSLH
-systemctl daemon-reload
+service sslh restart
 systemctl restart sslh
 /etc/init.d/sslh restart
 /etc/init.d/sslh status
@@ -312,44 +298,44 @@ chmod 644 /etc/stunnel5
 
 # Download Config Stunnel5
 cat > /etc/stunnel5/stunnel5.conf <<-END
-cert.pem=/etc/xray/xray.crt
-key.pem=/etc/xray/xray.key
+cert = /etc/xray/xray.crt
+key = /etc/xray/xray.key
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
 
 [dropbear]
-accept = 600
-connect = 127.0.0.1:200
-
-[dropbear]
-accept = 700
-connect = 127.0.0.1:300
+accept = 445
+connect = 127.0.0.1:109
 
 [openssh]
-accept = 800
-connect = 127.0.0.1:22
-
-[openssh]
-accept = 500
+accept = 777
 connect = 127.0.0.1:443
 
 [openvpn]
 accept = 990
 connect = 127.0.0.1:1194
 
+
 END
+
+# make a certificate
+#openssl genrsa -out key.pem 2048
+#openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
+#-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
+#cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
+
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
 [Unit]
-Description=STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING
-Documentation=https://stunnel5.org
-Documentation=https://t.me/zerossl
+Description=Stunnel5 Service
+Documentation=https://stunnel.org
+Documentation=https://github.com/Akbar218
 After=syslog.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/stunnel /etc/stunnel5/stunnel5.conf
+ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
 Type=forking
 
 [Install]
@@ -358,13 +344,7 @@ END
 
 # Service Stunnel5 /etc/init.d/stunnel5
 wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
-#make a certificate
-#openssl genrsa -out key.pem 2048
-#openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
-#-subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
-#cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
-#cert.pem=/etc/stunnel5/stunnel5.pem
-#key.pem=/etc/stunnel5/stunnel5.pem
+
 # Ubah Izin Akses
 chmod 600 /etc/stunnel5/stunnel5.pem
 chmod +x /etc/init.d/stunnel5
@@ -376,10 +356,9 @@ rm -r -f /usr/local/etc/stunnel/
 rm -f /usr/local/bin/stunnel
 rm -f /usr/local/bin/stunnel3
 rm -f /usr/local/bin/stunnel4
-rm -f /usr/local/bin/stunnel5
+#rm -f /usr/local/bin/stunnel5
 
 # Restart Stunnel 5
-systemctl daemon-reload
 systemctl stop stunnel5
 systemctl enable stunnel5
 systemctl start stunnel5
