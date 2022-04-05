@@ -32,23 +32,11 @@ MYIP2="s/xxxxxxxxx/$MYIP/g";
 NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 source /etc/os-release
 ver=$VERSION_ID
-
-#detail nama perusahaan
-country=US
-state=California
-locality=San-Fransisco
-organization=Cloudflare
-organizationalunit=www.cloudflare.com
-commonname=Cloudflare-Inc.
-email=djarumpentol01@gmail.com
-
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://${wisnuvpn}/password"
 chmod +x /etc/pam.d/common-password
-
 # go to root
 cd
-
 # Edit file /etc/systemd/system/rc-local.service
 cat > /etc/systemd/system/rc-local.service <<-END
 [Unit]
@@ -66,19 +54,10 @@ SysVStartPriority=99
 [Install]
 WantedBy=multi-user.target
 END
-
-
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
-#!/bin/sh -e
-# rc.local
-# By default this script does nothing.
-exit 0
-END
-
 # Ubah izin akses
 chmod +x /etc/rc.local
-
 # enable rc local
 systemctl enable rc-local
 systemctl start rc-local.service
@@ -308,7 +287,7 @@ cert.pem=/etc/xray/xray.crt
 key.pem=/etc/xray/xray.key
 # Download Config Stunnel5
 cat > /etc/stunnel5/stunnel5.conf <<-END
-#cert=/etc/stunnel5/stunel5.pem
+cert=/etc/stunnel5/stunel5.pem
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
@@ -340,12 +319,12 @@ make a certificate
 openssl genrsa -out key.pem 2048
 openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
 -subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
-cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
+cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
 
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
 [Unit]
-Description=STUNNEL5 ROUTING GAJAH DEMAK BY WISNU
+Description=STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING
 Documentation=https://stunnel5.org
 Documentation=https://t.me/zerossl
 After=syslog.target network-online.target
