@@ -186,9 +186,10 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 
 # install
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
-echo "clear" >> .profile
-echo "neofetch" >> .profile
+#echo "clear" >> .profile
+#echo "neofetch" >> .profile
 echo "status" >> .profile
+
 # install webserver
 apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
 rm /etc/nginx/sites-enabled/default
@@ -296,10 +297,9 @@ function InsStunnel(){
  StunnelDir=$(ls /etc/default | grep stunnel | head -n1)
 
  # Creating stunnel startup config using cat eof tricks
-cat <<'MyStunnelD' > /etc/default/$StunnelDir
 # My Stunnel Config
 ENABLED=1
-FILES="/etc/stunnel/*.conf"
+FILES="/etc/stunnel/stunnel.conf"
 OPTIONS=""
 BANNER="/etc/banner"
 PPP_RESTART=0
@@ -315,7 +315,7 @@ openssl req -new -x509 -days 9999 -nodes -subj "/C=ID/ST=Jawa_Tengah/L=Sukoharjo
 ##  > /dev/null 2>&1
 
  # Creating stunnel server config
-cat <<'MyStunnelC' > /etc/stunnel/stunnel.conf
+cat > /etc/stunnel/stunnel.conf << END
 # My Stunnel Config
 pid = /var/run/stunnel.pid
 cert = /etc/stunnel/stunnel.pem
@@ -339,7 +339,7 @@ connect = 127.0.0.1:443
 [openvpn]
 accept = 990
 connect = 127.0.0.1:1194
-MyStunnelC
+END
 
  # setting stunnel ports
 sed -i "s|Stunnel_Port1|$Stunnel_Port1|g" /etc/stunnel/stunnel.conf
@@ -350,7 +350,7 @@ sed -i "s|openssh_port_c|$(netstat -tlnp | grep -i ssh | awk '{print $4}' | cut 
  # Restarting stunnel service
 systemctl daemon-reload
 systemctl restart stunnel4
-systemctl status stunnel5
+systemctl status stunnel4
 #OpenVPN
 wget https://${wisnuvpn}/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 
