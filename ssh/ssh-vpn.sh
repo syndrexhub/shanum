@@ -126,7 +126,6 @@ apt-get install libauthen-pam-perl -y
 apt-get install libpam-runtime -y
 apt-get install libio-pty-perl -y
 apt-get install apt-show-versions -y
-apt-get install python -y
 apt-get install dbus -y
 apt-get install libxml-parser-perl -y
 apt-get install shared-mime-info -y
