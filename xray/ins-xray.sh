@@ -528,29 +528,16 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 999,
-      "protocol": "socks",
+      "tag": "K",
+      "port": 111,
+      "protocol": "mtproto",
       "settings": {
-        "auth": "password",
-        "accounts": [
+        "users": [
           {
-            "user": "gandring",
-            "pass": "gandring"
-#xray-socks
+            "secret": "abdff3490fe6bb16fbd57f4f45d7215a"
+#xray-mtproto
           }
-        ],
-        "udp": true
-      },
-      "streamSettings": {
-        "network": "tcp",
-        "security": "none",
-        "tlsSettings": {},
-        "tcpSettings": {},
-        "kcpSettings": {},
-        "wsSettings": {},
-        "httpSettings": {},
-        "quicSettings": {},
-        "grpcSettings": {}
+        ]
       },
       "sniffing": {
         "enabled": true,
@@ -561,18 +548,52 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 3443,
+      "port": 8880,
+      "protocol": "socks",
+      "settings": {
+        "auth": "password",
+        "accounts": [
+          {
+            "user": "gandring",
+            "pass": "g"
+#xray-socks
+          }
+        ],
+        "udp": true
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ]
+        },
+        "tcpSettings": {},
+        "kcpSettings": {},
+        "wsSettings": {},
+        "httpSettings": {},
+        "quicSettings": {},
+        "grpcSettings": {}
+      },
+      "domain": "${domain}"
+    },
+    {
+      "port": 660,
       "protocol": "trojan",
       "settings": {
         "clients": [
           {
-            "password": "gandring"
+            "password": "${uuid}"
 #xray-trojan
           }
         ],
         "fallbacks": [
           {
-            "dest": 80
+            "dest": 88
           }
         ]
       },
@@ -582,8 +603,8 @@ cat > /etc/xray/config.json << END
         "tlsSettings": {
           "certificates": [
             {
-              "certificateFile": "/root/.acme.sh/khh.zerossl.my.id_ecc/fullchain.cer",
-              "keyFile": "/root/.acme.sh/khh.zerossl.my.id_ecc/khh.zerossl.my.id.key"
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
             }
           ],
           "alpn": [
@@ -598,25 +619,6 @@ cat > /etc/xray/config.json << END
         "grpcSettings": {}
       },
       "domain": "${domain}",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
-    {
-      "tag": "M",
-      "port": 111,
-      "protocol": "mtproto",
-      "settings": {
-        "users": [
-          {
-            "secret": "65e02f37e50451e517108ef33704a6a1"
-          }
-        ]
-      },
       "sniffing": {
         "enabled": true,
         "destOverride": [
@@ -666,17 +668,17 @@ cat > /etc/xray/config.json << END
       },
       {
         "type": "field",
+        "inboundTag": [
+          "K"
+        ],
+        "outboundTag": "tg-out"
+      },
+      {
+        "type": "field",
         "outboundTag": "blocked",
         "protocol": [
           "bittorrent"
         ]
-      },
-      {
-        "type": "field",
-        "inboundTag": [
-          "M"
-        ],
-        "outboundTag": "tg-out"
       }
     ]
   }
