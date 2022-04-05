@@ -155,8 +155,8 @@ confdir /etc/privoxy
 logdir /var/log/privoxy
 filterfile default.filter
 logfile logfile
-listen-address 0.0.0.0:Privoxy_Port1
-listen-address 0.0.0.0:Privoxy_Port2
+listen-address 0.0.0.0:4000
+listen-address 0.0.0.0:5000
 toggle 1
 enable-remote-toggle 0
 enable-remote-http-toggle 0
@@ -171,12 +171,12 @@ split-large-forms 0
 keep-alive-timeout 5
 tolerate-pipelining 1
 socket-timeout 300
-permit-access 0.0.0.0/0 IP-ADDRESS
+permit-access 0.0.0.0/0 $MYIP
 privoxy
 IP-ADDRESS=$MYIP
 
 #Setting machine's IP Address inside of our privoxy config(security that only allows this machine to use this proxy server)
-sed -i "s|IP-ADDRESS|$IPADDR|g" /etc/privoxy/config
+sed -i "s|IP-ADDRESS|$MYIP|g" /etc/privoxy/config
  
 #Setting privoxy ports
 sed -i "s|Privoxy_Port1|$Privoxy_Port1|g" /etc/privoxy/config
@@ -224,17 +224,9 @@ sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7600 --max-c
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7700 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7800 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900 --max-clients 500' /etc/rc.local
-
-make a certificate
-openssl genrsa -out key.pem 4096
-openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
--subj "/C=US/ST=California/L=San-Fransisco/O=Cloudflare-Inc./OU=www.cloudflare.com/CN=smule.my.id/email=djarumpentol01@gmail.com"
-cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
-
-# setting port ssh
+#port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 sed -i 's/Port 2525/g' /etc/ssh/sshd_config
-
 # install dropbear
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
@@ -243,7 +235,6 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 300"/g' /etc/default/drop
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
-
 # install squid
 cd
 apt -y install squid3
@@ -255,28 +246,12 @@ apt -y install sslh
 rm -f /etc/default/sslh
 # Settings SSLH
 cat > /etc/default/sslh <<-END
-# Default options for sslh initscript
-# sourced by /etc/init.d/sslh
-
-# Disabled by default, to force yourself
-# to read the configuration:
-# - /usr/share/doc/sslh/README.Debian (quick start)
-# - /usr/share/doc/sslh/README, at "Configuration" section
-# - sslh(8) via "man sslh" for more configuration details.
-# Once configuration ready, you *must* set RUN to yes here
-# and try to start sslh (standalone mode only)
-
 RUN=yes
-
-# binary to use: forked (sslh) or single-thread (sslh-select) version
-# systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
-
 DAEMON_OPTS="--user sslh --listen 0.0.0.0:2082 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
-
 END
 # Service SSLH systemctl restart sslh
-#cat > /lib/systemd/system/sslh.service << END
+cat > /lib/systemd/system/sslh.service << END
 [Unit]
 Description=SSH MULTIPLEXLER CILEGON BANTEN BY GANDRING
 After=network.target
@@ -329,13 +304,11 @@ rm -r -f stunnel
 rm -f stunnel5.zip
 mkdir -p /etc/stunnel5
 chmod 644 /etc/stunnel5
-
+cert.pem=/etc/xray/xray.crt
+key.pem=/etc/xray/xray.key
 # Download Config Stunnel5
 cat > /etc/stunnel5/stunnel5.conf <<-END
-cert= /etc/xray/xray.crt
-key= /etc/xray/xray.key
-#cert= /etc/stunnel5/stunel5.pem
-
+#cert=/etc/stunnel5/stunel5.pem
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
@@ -378,29 +351,24 @@ Documentation=https://t.me/zerossl
 After=syslog.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
+ExecStart=/usr/local/bin/stunnel /etc/stunnel5/stunnel5.conf
 Type=forking
 
 [Install]
 WantedBy=multi-user.target
 END
-
 # Service Stunnel5 /etc/init.d/stunnel5
 wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
-
 # Ubah Izin Akses
 chmod 600 /etc/stunnel5/stunnel5.pem
 chmod +x /etc/init.d/stunnel5
 cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
-
 # Remove File
 rm -r -f /usr/local/share/doc/stunnel/
-rm -r -f /usr/local/etc/stunnel/
 rm -f /usr/local/bin/stunnel
 #rm -f /usr/local/bin/stunnel3
 rm -f /usr/local/bin/stunnel4
 #rm -f /usr/local/bin/stunnel5
-
 # Restart Stunnel 5
 systemctl stop stunnel5
 systemctl enable stunnel5
@@ -409,13 +377,10 @@ systemctl restart stunnel5
 /etc/init.d/stunnel5 restart
 /etc/init.d/stunnel5 status
 /etc/init.d/stunnel5 restart
-
 #OpenVPN
 wget https://${wisnuvpn}/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
-
 # install fail2ban
 apt -y install fail2ban
-
 # Instal DDOS Flate
 if [ -d '/usr/local/ddos' ]; then
 	echo; echo; echo "Please un-install the previous version first"
