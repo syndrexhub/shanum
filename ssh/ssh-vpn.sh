@@ -119,9 +119,19 @@ apt install gnupg1 -y
 apt install bc -y
 apt install jq -y
 apt install apt-transport-https -y
+apt-get install perl -y
+apt-get install libnet-ssleay-perl -y
+apt-get install openssl -y
+apt-get install libauthen-pam-perl -y
+apt-get install libpam-runtime -y
+apt-get install libio-pty-perl -y
+apt-get install apt-show-versions -y
+apt-get install python -y
+apt-get install dbus -y
+apt-get install libxml-parser-perl -y
+apt-get install shared-mime-info -y
 apt install build-essential -y
 apt install dirmngr -y
-apt install libxml-parser-perl -y
 apt install neofetch -y
 apt install git -y
 apt install lsof -y
@@ -283,29 +293,37 @@ systemctl enable vnstat
 rm -f /root/vnstat-2.6.tar.gz
 rm -rf /root/vnstat-2.6
 
-# install stunnel 5 
-cd /root/
-wget -q -O stunnel5.zip "https://${wisnuvpnnnn}/stunnel5.zip"
-unzip -o stunnel5.zip
-cd /root/stunnel
-chmod +x configure
-./configure
-make
-make install
-cd /root
-rm -r -f stunnel
-rm -f stunnel5.zip
-mkdir -p /etc/stunnel5
-chmod 644 /etc/stunnel5
+function InsStunnel(){
+ StunnelDir=$(ls /etc/default | grep stunnel | head -n1)
 
-# Download Config Stunnel5
-cat > /etc/stunnel5/stunnel5.conf <<-END
-cert = /etc/xray/xray.crt
-key = /etc/xray/xray.key
+ # Creating stunnel startup config using cat eof tricks
+cat <<'MyStunnelD' > /etc/default/$StunnelDir
+# My Stunnel Config
+ENABLED=1
+FILES="/etc/stunnel/*.conf"
+OPTIONS=""
+BANNER="/etc/banner"
+PPP_RESTART=0
+# RLIMITS="-n 4096 -d unlimited"
+RLIMITS=""
+MyStunnelD
+
+ # Removing all stunnel folder contents
+ rm -rf /etc/stunnel/*
+ 
+ # Creating stunnel certifcate using openssl
+openssl req -new -x509 -days 9999 -nodes -subj "/C=ID/ST=Jawa_Tengah/L=Sukoharjo/O=GANDRING/OU=GANDRING/CN=GANDRING" -out /etc/stunnel/stunnel.pem -keyout /etc/stunnel/stunnel.pem &> /dev/null
+##  > /dev/null 2>&1
+
+ # Creating stunnel server config
+cat <<'MyStunnelC' > /etc/stunnel/stunnel.conf
+# My Stunnel Config
+pid = /var/run/stunnel.pid
+cert = /etc/stunnel/stunnel.pem
 client = no
-socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
+TIMEOUTclose = 0
 
 [dropbear]
 accept = 445
@@ -322,56 +340,18 @@ connect = 127.0.0.1:443
 [openvpn]
 accept = 990
 connect = 127.0.0.1:1194
+MyStunnelC
 
-END
+ # setting stunnel ports
+sed -i "s|Stunnel_Port1|$Stunnel_Port1|g" /etc/stunnel/stunnel.conf
+sed -i "s|dropbear_port_c|$(netstat -tlnp | grep -i dropbear | awk '{print $4}' | cut -d: -f2 | xargs | awk '{print $2}' | head -n1)|g" /etc/stunnel/stunnel.conf
+sed -i "s|Stunnel_Port2|$Stunnel_Port2|g" /etc/stunnel/stunnel.conf
+sed -i "s|openssh_port_c|$(netstat -tlnp | grep -i ssh | awk '{print $4}' | cut -d: -f2 | xargs | awk '{print $2}' | head -n1)|g" /etc/stunnel/stunnel.conf
 
-# make a certificate
-#openssl genrsa -out key.pem 2048
-#openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
-#-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
-#cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
-
-# Service Stunnel5 systemctl restart stunnel5
-cat > /etc/systemd/system/stunnel5.service << END
-[Unit]
-Description=Stunnel5 Service
-Documentation=https://stunnel.org
-Documentation=https://github.com/Akbar218
-After=syslog.target network-online.target
-
-[Service]
-ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
-Type=forking
-
-[Install]
-WantedBy=multi-user.target
-END
-
-# Service Stunnel5 /etc/init.d/stunnel5
-wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
-
-# Ubah Izin Akses
-chmod 600 /etc/stunnel5/stunnel5.pem
-chmod +x /etc/init.d/stunnel5
-cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
-
-# Remove File
-rm -r -f /usr/local/share/doc/stunnel/
-rm -r -f /usr/local/etc/stunnel/
-rm -f /usr/local/bin/stunnel
-rm -f /usr/local/bin/stunnel3
-rm -f /usr/local/bin/stunnel4
-#rm -f /usr/local/bin/stunnel5
-
-# Restart Stunnel 5
-systemctl stop stunnel5
-systemctl enable stunnel5
-systemctl start stunnel5
-systemctl restart stunnel5
-/etc/init.d/stunnel5 restart
-/etc/init.d/stunnel5 status
-/etc/init.d/stunnel5 restart
-
+ # Restarting stunnel service
+systemctl daemon-reload
+systemctl restart stunnel4
+systemctl status stunnel5
 #OpenVPN
 wget https://${wisnuvpn}/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 
@@ -723,7 +703,7 @@ chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/dropbear restart
 /etc/init.d/fail2ban restart
 /etc/init.d/sslh restart
-/etc/init.d/stunnel5 restart
+/etc/init.d/stunnel4 restart
 /etc/init.d/vnstat restart
 /etc/init.d/fail2ban restart
 /etc/init.d/squid restart
