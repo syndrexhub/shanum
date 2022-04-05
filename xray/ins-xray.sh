@@ -291,7 +291,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 2443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -331,7 +331,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 2443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -376,7 +376,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 3443,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -706,7 +706,7 @@ cat > /etc/xray/xtrojan.json << END
         "decryption": "none",
         "fallbacks": [
           {
-            "dest": 443,
+            "dest": 5443,
             "xver": 1
           },
           {
@@ -734,7 +734,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 443,
+      "port": 6443,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-gRPC-in",
@@ -828,7 +828,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 443,
+      "port": 3443,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-HTTP/2-in",
@@ -989,8 +989,8 @@ iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 777 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2053 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8880 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 70 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 70 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 99 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 99 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2083 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2083 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2096 -j ACCEPT
@@ -999,14 +999,26 @@ iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2095 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2096 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 999 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 999 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8448 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8448 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 808 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 808 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 111 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 111 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 333 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 333 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 880 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 880 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 888 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 888 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 3443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 3443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 5443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 5443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 6443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 6443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 4443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 4443 -j ACCEPT
 iptables-save > /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
