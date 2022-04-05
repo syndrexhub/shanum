@@ -34,7 +34,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-nontls 2052
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-nontls 80
 Restart=on-failure
 
 [Install]
@@ -90,7 +90,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-tls 70
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-tls 443
 Restart=on-failure
 
 [Install]
