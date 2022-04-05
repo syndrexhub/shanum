@@ -33,21 +33,9 @@ NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 source /etc/os-release
 ver=$VERSION_ID
 
-#detail nama perusahaan
-country=US
-state=California
-locality=San-Fransisco
-organization=Cloudflare
-organizationalunit=www.cloudflare.com
-commonname=Cloudflare-Inc.
-email=djarumpentol01@gmail.com
-
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://${wisnuvpn}/password"
 chmod +x /etc/pam.d/common-password
-
-# go to root
-cd
 
 # Edit file /etc/systemd/system/rc-local.service
 cat > /etc/systemd/system/rc-local.service <<-END
@@ -268,7 +256,7 @@ DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:500 --ssh 127.0.0.
 
 END
 # Service SSLH systemctl restart sslh
-cat > /lib/systemd/system/sslh.service << END
+cat > /etc/systemd/system/sslh.service << END
 [Unit]
 Description=SSH MULTIPLEXLER CILEGON BANTEN BY GANDRING
 After=network.target
