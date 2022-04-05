@@ -1,5 +1,5 @@
 #!/bin/bash
-# My Telegram : https://t.me/Akbar218
+# My Telegram : https://t.me/zerossl
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -13,27 +13,15 @@ LIGHT='\033[0;37m'
 # ==========================================
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-IZIN=$( curl https://raw.githubusercontent.com/AkbarStoreVPN/perizinan/main/ipvps.txt | grep $MYIP )
-if [ $MYIP = $IZIN ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin!!"
-echo -e "${NC}${LIGHT}Facebook : https://m.facebook.com/lis.tio.718"
-echo -e "${NC}${LIGHT}WhatsApp : 081545854516"
-echo -e "${NC}${LIGHT}Telegram : https://t.me/Akbar218"
-exit 0
-fi
 clear
 MYIP=$(wget -qO- ipinfo.io/ip);
 ovpn="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 ovpn2="$(netstat -nlpu | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 echo -e "======================================"
 echo -e ""
-echo -e "[1]  Change Port TCP $ovpn"
-echo -e "[2]. Change Port UDP $ovpn2"
-echo -e "[3]. Exit"
+echo -e "[1]. Ubah Port TCP $ovpn"
+echo -e "[2]. Ubah Port UDP $ovpn2"
+echo -e "[3]. keluar"
 echo -e ""
 echo -e "======================================"
 echo -e ""
@@ -94,7 +82,7 @@ echo '</ca>' >> /etc/openvpn/tcp.ovpn
 cp /etc/openvpn/tcp.ovpn /home/vps/public_html/tcp.ovpn
 systemctl disable --now openvpn-server@server-tcp > /dev/null
 systemctl enable --now openvpn-server@server-tcp > /dev/null
-sed -i "s/   - OpenVPN                 : TCP $ovpn, UDP $ovpn2, SSL 442/   - OpenVPN                 : TCP $vpn, UDP $ovpn2, SSL 442/g" /root/log-install.txt
+sed -i "s/   - OpenVPN                 : TCP $ovpn, UDP $ovpn2, SSL 3269/   - OpenVPN                 : TCP $vpn, UDP $ovpn2, SSL 442/g" /root/log-install.txt
 sed -i "s/$ovpn/$vpn/g" /etc/stunnel/stunnel.conf
 echo -e "\e[032;1mPort $vpn modified successfully\e[0m"
 else
@@ -156,7 +144,7 @@ echo '</ca>' >> /etc/openvpn/udp.ovpn
 cp /etc/openvpn/udp.ovpn /home/vps/public_html/udp.ovpn
 systemctl disable --now openvpn-server@server-udp > /dev/null
 systemctl enable --now openvpn-server@server-udp > /dev/null
-sed -i "s/   - OpenVPN                 : TCP $ovpn, UDP $ovpn2, SSL 442/   - OpenVPN                 : TCP $ovpn, UDP $vpn, SSL 442/g" /root/log-install.txt
+sed -i "s/   - OpenVPN                 : TCP $ovpn, UDP $ovpn2, SSL 3269/   - OpenVPN                 : TCP $ovpn, UDP $vpn, SSL 442/g" /root/log-install.txt
 echo -e "\e[032;1mPort $vpn modified successfully\e[0m"
 else
 echo "Port $vpn is used"

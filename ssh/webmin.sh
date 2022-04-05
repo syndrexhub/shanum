@@ -1,5 +1,5 @@
 #!/bin/bash
-# My Telegram : https://t.me/Akbar218
+# My Telegram : https://t.me/zerossl
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -13,18 +13,6 @@ LIGHT='\033[0;37m'
 # ==========================================
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-IZIN=$( curl https://raw.githubusercontent.com/AkbarStoreVPN/perizinan/main/ipvps.txt | grep $MYIP )
-if [ $MYIP = $IZIN ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin!!"
-echo -e "${NC}${LIGHT}Facebook : https://m.facebook.com/lis.tio.718"
-echo -e "${NC}${LIGHT}WhatsApp : 081545854516"
-echo -e "${NC}${LIGHT}Telegram : https://t.me/Akbar218"
-exit 0
-fi
 clear
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[Installed]${Font_color_suffix}"
@@ -38,10 +26,12 @@ apt install gnupg gnupg1 gnupg2 -y
 wget http://www.webmin.com/jcameron-key.asc
 apt-key add jcameron-key.asc
 echo " Start Install Webmin"
+echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 clear
 sleep 0.5
 apt update > /dev/null 2>&1
 apt install webmin -y
+echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
 /etc/init.d/webmin restart
 rm -f /root/jcameron-key.asc
@@ -52,7 +42,7 @@ echo "  Done Install Webmin  "
 echo "======================="
 echo "http://$IP:10000"
 echo "======================="
-echo "Script By LamVpn"
+echo "Script By @zerossl"
 }
 function restart () {
 echo " Restarting Webmin"
@@ -64,7 +54,7 @@ echo ""
 echo "======================="
 echo "  Done Restart Webmin  "
 echo "======================="
-echo "Script By LamVpn"
+echo "Script By zerossl"
 }
 function uninstall () {
 echo " Removing Repositori Webmin"
@@ -79,7 +69,7 @@ echo ""
 echo "========================="
 echo "  Done Uninstall Webmin  "
 echo "========================="
-echo "Script By LamVpn"
+echo "Script By zerossl"
 }
 if [[ "$cek" = "perl" ]]; then
 sts="${Info}"

@@ -1,5 +1,5 @@
 #!/bin/bash
-# My Telegram : https://t.me/Akbar218
+# My Telegram : https://t.me/zerossl
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -15,11 +15,11 @@ LIGHT='\033[0;37m'
 MYIP=$(wget -qO- ipinfo.io/ip);
 clear
 apt install jq curl -y
-DOMAIN=smule.my.id
-sub=$(</dev/urandom tr -dc a-z0-9 | head -c3)
-SUB_DOMAIN=${sub}.smule.my.id
+DOMAIN=zerossl.my.id
+sub=$(</dev/urandom tr -dc a-z0-9 | head -c2)
+SUB_DOMAIN=${sub}.zerossl.my.id
 CF_ID=djarumpentol01@gmail.com
-CF_KEY=5927a0512a815d98fab1debb4e6333e0d6a8c
+CF_KEY=8e1ad283529b59f2632be2330103abda794ce
 set -euo pipefail
 IP=$(wget -qO- ipinfo.io/ip);
 echo "Updating DNS for ${SUB_DOMAIN}..."
@@ -38,14 +38,14 @@ if [[ "${#RECORD}" -le 10 ]]; then
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
+     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":300,"proxied":false}' | jq -r .result.id)
 fi
 
 RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
+     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":300,"proxied":false}')
 
 WILD_DOMAIN="*.$sub"
 set -euo pipefail
@@ -66,14 +66,18 @@ if [[ "${#RECORD}" -le 10 ]]; then
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
+     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":300,"proxied":false}' | jq -r .result.id)
 fi
 
 RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
+     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":300,"proxied":false}')
 echo "Host : $SUB_DOMAIN"
 echo $SUB_DOMAIN > /root/domain
+# / / Make Main Directory
+mkdir -p /usr/bin/xray
+mkdir -p /etc/xray
+cp /root/domain /etc/xray
 rm -f /root/cf.sh

@@ -1,5 +1,5 @@
 #!/bin/bash
-# My Telegram : https://t.me/Akbar218
+# My Telegram : https://t.me/zerossl
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -14,29 +14,18 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl https://raw.githubusercontent.com/AkbarStoreVPN/perizinan/main/ipvps.txt | grep $MYIP )
-if [ $MYIP = $IZIN ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin!!"
-echo -e "${NC}${LIGHT}Facebook : https://m.facebook.com/lis.tio.718"
-echo -e "${NC}${LIGHT}WhatsApp : 081545854516"
-echo -e "${NC}${LIGHT}Telegram : https://t.me/Akbar218"
-exit 0
-fi
-clear
-tls="$(cat ~/log-install.txt | grep -w "Vmess TLS" | cut -d: -f2|sed 's/ //g')"
-none="$(cat ~/log-install.txt | grep -w "Vmess None TLS" | cut -d: -f2|sed 's/ //g')"
+IZIN=$(wget -qO- ipinfo.io/ip);
+tls="$(cat ~/log-install.txt | grep -w "VMESS TLS" | cut -d: -f2|sed 's/ //g'"
+none="$(cat ~/log-install.txt | grep -w "VMESS NON TLS" | cut -d: -f2|sed 's/ //g')"
 echo -e "======================================"
 echo -e ""
-echo -e "[1]. Change Port Vmess TLS $tls"
-echo -e "[2]. Change Port Vmess None TLS $none"
-echo -e "[3]. Exit"
+echo -e "[1]. Ganti Port Vmess TLS $tls"
+echo -e "[2]. Ganti Port Vmess Non TLS $none"
+echo -e "[3]. Keluar"
 echo -e ""
 echo -e "======================================"
 echo -e ""
-read -p "Select From Options [ 1-3 ] : " prot
+read -p "Silahkan Pilih Angka [ 1-3 ] : " prot
 echo -e ""
 case $prot in
 1)
@@ -48,8 +37,8 @@ fi
 cek=$(netstat -nutlp | grep -w $tls1)
 if [[ -z $cek ]]; then
 sed -i "s/$tls/$tls1/g" /etc/xray/config.json
-sed -i "s/   - XRAYS Vmess TLS         : $tls/   - XRAYS Vmess TLS         : $tls1/g" /root/log-install.txt
-sed -i "s/   - XRAYS Vless TLS         : $tls/   - XRAYS Vless TLS         : $tls1/g" /root/log-install.txt
+sed -i "s/   - VMESS TLS         : $tls/   - VMESS TLS         : $tls1/g" /root/log-install.txt
+sed -i "s/   - VLESS TLS         : $tls/   - VLESS TLS         : $tls1/g" /root/log-install.txt
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $tls -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $tls -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $tls1 -j ACCEPT
@@ -74,8 +63,8 @@ fi
 cek=$(netstat -nutlp | grep -w $none1)
 if [[ -z $cek ]]; then
 sed -i "s/$none/$none1/g" /etc/xray/config.json
-sed -i "s/   - XRAYS Vmess None TLS    : $none/   - XRAYS Vmess None TLS    : $none1/g" /root/log-install.txt
-sed -i "s/   - XRAYS Vless None TLS    : $none/   - XRAYS Vless None TLS    : $none1/g" /root/log-install.txt
+sed -i "s/   - VMESS NON TLS    : $none/   - VMESS NON TLS    : $none1/g" /root/log-install.txt
+sed -i "s/   - VLESS NON TLS    : $none/   - VLESS NON TLS    : $none1/g" /root/log-install.txt
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $none -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $none -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $none1 -j ACCEPT

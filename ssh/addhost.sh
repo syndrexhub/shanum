@@ -1,40 +1,19 @@
 #!/bin/bash
-# My Telegram : https://t.me/Akbar218
-# ==========================================
-# Color
-RED='\033[0;31m'
-NC='\033[0m'
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-LIGHT='\033[0;37m'
-# ==========================================
-# Getting
-MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-IZIN=$( curl https://raw.githubusercontent.com/AkbarStoreVPN/perizinan/main/ipvps.txt | grep $MYIP )
-if [ $MYIP = $IZIN ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin!!"
-echo -e "${NC}${LIGHT}Facebook : https://m.facebook.com/lis.tio.718"
-echo -e "${NC}${LIGHT}WhatsApp : 081545854516"
-echo -e "${NC}${LIGHT}Telegram : https://t.me/Akbar218"
-exit 0
-fi
-clear
-read -rp "Domain/Host : " -e domain
-echo "IP=$domain" >>/var/lib/akbarstorevpn/ipvps.conf
-echo $domain > /etc/xray/domain
-echo start
-systemctl stop xray.service
-/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
-systemctl start xray.service
-echo Done
-sleep 1.5
-clear
-neofetch
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+MYIP=$(wget -qO- https://icanhazip.com);
+DOMAIN=$(wget -qO- https://icanhazip.com);
+MYIP=$domain
+read -p "Masukan Subdomain Anda :" sub
+curl https://get.acme.sh | sh
+alias acme.sh=~/.acme.sh/acme.sh
+/root/.acme.sh/acme.sh --upgrade --auto-upgrade
+/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+/root/.acme.sh/acme.sh --issue -d "${domain}" --standalone --keylength ec-384
+/root/.acme.sh/acme.sh --install-cert -d "${domain}" --ecc \
+--fullchain-file /etc/xray/xray.crt \
+--key-file /etc/xray/xray.key
+chown -R nobody:nogroup /etc/xray
+chmod 644 /etc/xray/xray.crt
+chmod 644 /etc/xray/xray.key

@@ -1,5 +1,5 @@
 #!/bin/bash
-# My Telegram : https://t.me/Akbar218
+# My Telegram : https://t.me/zerossl
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -14,10 +14,9 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 
-# By Akbar Maulana
 # ==================================================
 # Link Hosting Kalian
-wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh"
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/master/ssh"
 
 # initialisasi var
 export DEBIAN_FRONTEND=noninteractive
@@ -119,12 +118,12 @@ echo '</ca>' >> /etc/openvpn/tcp.ovpn
 # Copy config OpenVPN client ke home directory root agar mudah didownload ( TCP 1194 )
 cp /etc/openvpn/tcp.ovpn /home/vps/public_html/tcp.ovpn
 
-# masukkan certificatenya ke dalam config client UDP 2200
+# masukkan certificatenya ke dalam config client UDP 1195
 echo '<ca>' >> /etc/openvpn/udp.ovpn
 cat /etc/openvpn/server/ca.crt >> /etc/openvpn/udp.ovpn
 echo '</ca>' >> /etc/openvpn/udp.ovpn
 
-# Copy config OpenVPN client ke home directory root agar mudah didownload ( UDP 2200 )
+# Copy config OpenVPN client ke home directory root agar mudah didownload ( UDP 1195 )
 cp /etc/openvpn/udp.ovpn /home/vps/public_html/udp.ovpn
 
 # masukkan certificatenya ke dalam config client SSL
@@ -139,7 +138,6 @@ cp /etc/openvpn/ssl.ovpn /home/vps/public_html/ssl.ovpn
 
 iptables -t nat -I POSTROUTING -s 10.6.0.0/24 -o $ANU -j MASQUERADE
 iptables -t nat -I POSTROUTING -s 10.7.0.0/24 -o $ANU -j MASQUERADE
-iptables -t nat -I POSTROUTING -s 10.8.0.0/24 -o $ANU -j MASQUERADE
 iptables-save > /etc/iptables.up.rules
 chmod +x /etc/iptables.up.rules
 

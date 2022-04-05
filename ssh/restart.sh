@@ -1,5 +1,5 @@
 #!/bin/bash
-# My Telegram : https://t.me/Akbar218
+# My Telegram : https://t.me/zerossl
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -11,20 +11,6 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
-# Getting
-MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-IZIN=$( curl https://raw.githubusercontent.com/AkbarStoreVPN/perizinan/main/ipvps.txt | grep $MYIP )
-if [ $MYIP = $IZIN ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin!!"
-echo -e "${NC}${LIGHT}Facebook : https://m.facebook.com/lis.tio.718"
-echo -e "${NC}${LIGHT}WhatsApp : 081545854516"
-echo -e "${NC}${LIGHT}Telegram : https://t.me/Akbar218"
-exit 0
-fi
 clear
 echo -e ""
 echo -e "Starting Restart All Service"
@@ -38,7 +24,7 @@ systemctl restart xl2tpd
 systemctl restart pptpd
 systemctl restart ipsec
 systemctl restart accel-ppp
-systemctl restart ws-ovpn
+systemctl restart ovpnws
 systemctl restart wg-quick@wg0
 systemctl restart ssh-ohp
 systemctl restart dropbear-ohp
@@ -53,11 +39,7 @@ systemctl restart trojan-go
 /etc/init.d/fail2ban restart
 /etc/init.d/cron restart
 /etc/init.d/nginx restart
-/etc/init.d/squid restart
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000
 echo -e "Restart All Service Berhasil"
-sleep 2
-clear
-info
