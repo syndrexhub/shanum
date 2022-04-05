@@ -14,16 +14,16 @@ LIGHT='\033[0;37m'
 MYIP=$(wget -qO- ipinfo.io/ip);
 # ==================================================
 # Link Hosting Kalian
-wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh"
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh"
 
 # Link Hosting Kalian Untuk Xray
-wisnuvpnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/xray"
+wisnuvpnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/xray"
 
 # Link Hosting Kalian Untuk Trojan Go
-wisnuvpnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/trojango"
+wisnuvpnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/trojango"
 
 # Link Hosting Kalian Untuk Stunnel5
-wisnuvpnnnn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/stunnel5"
+wisnuvpnnnn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/stunnel5"
 
 # initializing var
 export DEBIAN_FRONTEND=noninteractive
@@ -148,15 +148,13 @@ Privoxy_Port1='4000'
 Privoxy_Port2='5000'
 
  # Creating Privoxy server config using cat eof tricks
- cat <<'privoxy' > /etc/privoxy/config
-# My Privoxy Server Config
-user-manual /usr/share/doc/privoxy/user-manual
+cat > /etc/privoxy/config << EOF
 confdir /etc/privoxy
 logdir /var/log/privoxy
 filterfile default.filter
 logfile logfile
-listen-address 0.0.0.0:Privoxy_Port1
-listen-address 0.0.0.0:Privoxy_Port2
+listen-address 0.0.0.0:4000
+listen-address 0.0.0.0:5000
 toggle 1
 enable-remote-toggle 0
 enable-remote-http-toggle 0
@@ -171,12 +169,12 @@ split-large-forms 0
 keep-alive-timeout 5
 tolerate-pipelining 1
 socket-timeout 300
-permit-access 0.0.0.0/0 IP-ADDRESS
+permit-access 0.0.0.0/0 $MYIP
 privoxy
 IP-ADDRESS=$MYIP
-
+EOF
 #Setting machine's IP Address inside of our privoxy config(security that only allows this machine to use this proxy server)
-sed -i "s|IP-ADDRESS|$IPADDR|g" /etc/privoxy/config
+sed -i "s|IP-ADDRESS|$MYIP|g" /etc/privoxy/config
  
 #Setting privoxy ports
 sed -i "s|Privoxy_Port1|$Privoxy_Port1|g" /etc/privoxy/config
@@ -225,12 +223,6 @@ sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7700 --max-c
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7800 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900 --max-clients 500' /etc/rc.local
 
-make a certificate
-openssl genrsa -out key.pem 4096
-openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
--subj "/C=US/ST=California/L=San-Fransisco/O=Cloudflare-Inc./OU=www.cloudflare.com/CN=smule.my.id/email=djarumpentol01@gmail.com"
-cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
-
 # setting port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 sed -i 's/Port 2525/g' /etc/ssh/sshd_config
@@ -276,9 +268,9 @@ DAEMON_OPTS="--user sslh --listen 0.0.0.0:2082 --ssl 127.0.0.1:500 --ssh 127.0.0
 
 END
 # Service SSLH systemctl restart sslh
-#cat > /lib/systemd/system/sslh.service << END
+cat > /lib/systemd/system/sslh.service << END
 [Unit]
-Description=SSH MULTIPLEXLER CILEGON BANTEN BY WISNU
+Description=SSH MULTIPLEXLER CILEGON BANTEN BY GANDRING
 After=network.target
 Documentation=http://t.me/zerossl
 
@@ -332,9 +324,7 @@ chmod 644 /etc/stunnel5
 
 # Download Config Stunnel5
 cat > /etc/stunnel5/stunnel5.conf <<-END
-cert= /etc/xray/xray.crt
-key= /etc/xray/xray.key
-#cert= /etc/stunnel5/stunel5.pem
+cert = /etc/stunnel5/stunel5.pem
 
 client = no
 socket = a:SO_REUSEADDR=1
@@ -367,18 +357,18 @@ make a certificate
 openssl genrsa -out key.pem 2048
 openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
 -subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
-cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
+cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
 
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
 [Unit]
-Description=STUNNEL5 ROUTING GAJAH DEMAK BY WISNU
+Description=STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING
 Documentation=https://stunnel5.org
 Documentation=https://t.me/zerossl
 After=syslog.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
+ExecStart=/usr/local/bin/stunnel /etc/stunnel5/stunnel5.conf
 Type=forking
 
 [Install]
@@ -397,9 +387,9 @@ cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
 rm -r -f /usr/local/share/doc/stunnel/
 rm -r -f /usr/local/etc/stunnel/
 rm -f /usr/local/bin/stunnel
-#rm -f /usr/local/bin/stunnel3
+rm -f /usr/local/bin/stunnel3
 rm -f /usr/local/bin/stunnel4
-#rm -f /usr/local/bin/stunnel5
+rm -f /usr/local/bin/stunnel5
 
 # Restart Stunnel 5
 systemctl stop stunnel5
@@ -474,7 +464,7 @@ netfilter-persistent reload
 cd /usr/bin
 wget -O addhost "https://${wisnuvpn}/addhost.sh"
 wget -O about "https://${wisnuvpn}/about.sh"
-wget -O menu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/menu.sh"
+wget -O menu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/menu.sh"
 wget -O addssh "https://${wisnuvpn}/addssh.sh"
 wget -O trialssh "https://${wisnuvpn}/trialssh.sh"
 wget -O menuu "https://${wisnuvpn}/menuu.sh"
@@ -580,30 +570,30 @@ wget -O addtrgo "https://${wisnuvpnnn}/addtrgo.sh"
 wget -O deltrgo "https://${wisnuvpnnn}/deltrgo.sh"
 wget -O renewtrgo "https://${wisnuvpnnn}/renewtrgo.sh"
 wget -O cektrgo "https://${wisnuvpnnn}/cektrgo.sh"
-wget -O portsshnontls "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portsshnontls.sh"
-wget -O portsshwstls "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portsshwstls.sh"
-wget -O status "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/status.sh"
-wget -O restart "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/restart.sh"
-wget -O portdropbear "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portdropbear.sh"
-wget -O portopenssh "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portopenssh.sh"
-wget -O addnewtr "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/xray/addnewtr.sh"
+wget -O portsshnontls "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portsshnontls.sh"
+wget -O portsshwstls "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portsshwstls.sh"
+wget -O status "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/status.sh"
+wget -O restart "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/restart.sh"
+wget -O portdropbear "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portdropbear.sh"
+wget -O portopenssh "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portopenssh.sh"
+wget -O addnewtr "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/xray/addnewtr.sh"
 wget -O renewtrojanhdua "https://${wisnuvpnn}/renewtrojanhdua.sh"
-wget -O portstunnel5 "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/ssh/portstunnel5.sh"
-wget -O trpcwsmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/trpcwsmenu.sh"
-wget -O sshovpnmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/sshovpnmenu.sh"
-#wget -O l2tpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/l2tpmenu.sh"
-wget -O l2tppmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/l2tppmenu.sh"
-#wget -O pptpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/pptpmenu.sh"
-#wget -O sstpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/sstpmenu.sh"
-wget -O wgmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/wgmenu.sh"
-wget -O ssmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/ssmenu.sh"
-#wget -O ssrmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/ssrmenu.sh"
-wget -O vmessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/vmessmenu.sh"
-wget -O vlessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/vlessmenu.sh"
-#wget -O grpcmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/grpcmenu.sh"
-wget -O trghmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/trghmenu.sh"
-wget -O trxtmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/trxtmenu.sh"
-wget -O setmenu "https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/update/setmenu.sh"
+wget -O portstunnel5 "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh/portstunnel5.sh"
+wget -O trpcwsmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trpcwsmenu.sh"
+wget -O sshovpnmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/sshovpnmenu.sh"
+#wget -O l2tpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/l2tpmenu.sh"
+wget -O l2tppmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/l2tppmenu.sh"
+#wget -O pptpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/pptpmenu.sh"
+#wget -O sstpmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/sstpmenu.sh"
+wget -O wgmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/wgmenu.sh"
+wget -O ssmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/ssmenu.sh"
+#wget -O ssrmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/ssrmenu.sh"
+wget -O vmessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/vmessmenu.sh"
+wget -O vlessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/vlessmenu.sh"
+#wget -O grpcmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/grpcmenu.sh"
+wget -O trghmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trghmenu.sh"
+wget -O trxtmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trxtmenu.sh"
+wget -O setmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/setmenu.sh"
 
 chmod +x addnewtr
 chmod +x addnewvmess
