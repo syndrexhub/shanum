@@ -26,7 +26,7 @@ declare ingfo=()
 #=====================================
 status01=$(systemctl status dropbear         | grep -i "active (running)")
 status02=$(systemctl status sshd             | grep -i "active (running)")
-status03=$(systemctl status stunnel4         | grep -i "active (running)")
+status03=$(systemctl status stunnel5         | grep -i "active (running)")
 status04=$(systemctl status openvpn          | grep -i "active (exited)")
 status05=$(systemctl status dropbear-ohp     | grep -i "active (running)")
 status06=$(systemctl status openvpn-ohp      | grep -i "active (running)")
