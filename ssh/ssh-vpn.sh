@@ -258,11 +258,11 @@ DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:500 --ssh 127.0.0.
 END
 
 # Restart Service SSLH
-service sslh restart
+systemctl daemon-reload
+systemctl enable sslh
 systemctl restart sslh
 /etc/init.d/sslh restart
 /etc/init.d/sslh status
-/etc/init.d/sslh restart
 
 # setting vnstat
 apt -y install vnstat
@@ -298,26 +298,23 @@ chmod 644 /etc/stunnel5
 
 # Download Config Stunnel5
 cat > /etc/stunnel5/stunnel5.conf <<-END
-cert = /etc/xray/xray.crt
-key = /etc/xray/xray.key
+cert = /etc/stunnel5/stunnel5.pem
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
 
 [dropbear]
-accept = 445
-connect = 127.0.0.1:109
+accept = 600
+connect = 127.0.0.1:200
 
 [openssh]
-accept = 777
+accept = 500
 connect = 127.0.0.1:443
 
 [openvpn]
 accept = 990
 connect = 127.0.0.1:1194
-
-
 END
 
 # make a certificate
@@ -325,7 +322,7 @@ END
 #openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
 #-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
 #cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
-
+cat > /etc/xray/xray.crt /etc/xray/xray.key >> /etc/stunnel5/stunnel5.pem
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
 [Unit]
@@ -359,6 +356,7 @@ rm -f /usr/local/bin/stunnel4
 #rm -f /usr/local/bin/stunnel5
 
 # Restart Stunnel 5
+systemctl daemon-reload
 systemctl stop stunnel5
 systemctl enable stunnel5
 systemctl start stunnel5
