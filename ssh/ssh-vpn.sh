@@ -34,21 +34,17 @@ source /etc/os-release
 ver=$VERSION_ID
 
 #detail nama perusahaan
-country=ID
-state=Indonesia
-locality=Indonesia
-organization=akbarstorevpn
-organizationalunit=akbarstorevpn
-commonname=akbarstorevpn
-email=akbarssh21@gmail.com
+country=US
+state=California
+locality=San-Fransisco
+organization=Cloudflare
+organizationalunit=www.cloudflare.com
+commonname=Cloudflare-Inc.
+email=djarumpentol01@gmail.com
 
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://${wisnuvpn}/password"
 chmod +x /etc/pam.d/common-password
-
-# Privoxy Ports
-Privoxy_Port1='4000'
-Privoxy_Port2='5000'
 
 # go to root
 cd
@@ -58,6 +54,7 @@ cat > /etc/systemd/system/rc-local.service <<-END
 [Unit]
 Description=/etc/rc.local
 ConditionPathExists=/etc/rc.local
+
 [Service]
 Type=forking
 ExecStart=/etc/rc.local start
@@ -65,9 +62,11 @@ TimeoutSec=0
 StandardOutput=tty
 RemainAfterExit=yes
 SysVStartPriority=99
+
 [Install]
 WantedBy=multi-user.target
 END
+
 
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
@@ -94,20 +93,23 @@ apt upgrade -y
 apt dist-upgrade -y
 apt-get remove --purge ufw firewalld -y
 apt-get remove --purge exim4 -y
+apt-get purge apache2* -y
+rm -rf /etc/apache2
 
 # install wget and curl
-apt -y install wget
-apt install curl -y
-apt install netcat -y
-apt install python-pip -y
-apt install socat -y
+apt -y install wget curl
+
 # Install Requirements Tools
 apt install ruby -y
 apt install python -y
-apt install make -y
-apt install cmake -y
-apt install coreutils -y
 apt install privoxy -y
+apt install make -y
+apt install cowsay -y
+apt install figlet -y
+apt install lolcat -y
+apt install cmake -y
+apt install ncurses-utils -y
+apt install coreutils -y
 apt install rsyslog -y
 apt install net-tools -y
 apt install zip -y
@@ -119,18 +121,9 @@ apt install gnupg1 -y
 apt install bc -y
 apt install jq -y
 apt install apt-transport-https -y
-apt-get install perl -y
-apt-get install libnet-ssleay-perl -y
-apt-get install openssl -y
-apt-get install libauthen-pam-perl -y
-apt-get install libpam-runtime -y
-apt-get install libio-pty-perl -y
-apt-get install apt-show-versions -y
-apt-get install dbus -y
-apt-get install libxml-parser-perl -y
-apt-get install shared-mime-info -y
 apt install build-essential -y
 apt install dirmngr -y
+apt install libxml-parser-perl -y
 apt install neofetch -y
 apt install git -y
 apt install lsof -y
@@ -142,10 +135,20 @@ apt install libreadline-dev -y
 apt install zlib1g-dev -y
 apt install libssl-dev -y
 apt install libssl1.0-dev -y
-apt install dos2unix -y
+gem install lolcat
+apt install jq curl -y
+apt install dnsutils jq -y
+apt-get install net-tools -y
+apt-get install tcpdump -y
+apt-get install dsniff -y
+apt install grepcidr -y
+
+# Privoxy Ports
+Privoxy_Port1='4000'
+Privoxy_Port2='5000'
 
  # Creating Privoxy server config using cat eof tricks
-cat <<'privoxy' > /etc/privoxy/config
+ cat <<'privoxy' > /etc/privoxy/config
 # My Privoxy Server Config
 user-manual /usr/share/doc/privoxy/user-manual
 confdir /etc/privoxy
@@ -168,7 +171,7 @@ split-large-forms 0
 keep-alive-timeout 5
 tolerate-pipelining 1
 socket-timeout 300
-permit-access 0.0.0.0/0 $MYIP
+permit-access 0.0.0.0/0 IP-ADDRESS
 privoxy
 IP-ADDRESS=$MYIP
 
@@ -178,24 +181,25 @@ sed -i "s|IP-ADDRESS|$MYIP|g" /etc/privoxy/config
 #Setting privoxy ports
 sed -i "s|Privoxy_Port1|$Privoxy_Port1|g" /etc/privoxy/config
 sed -i "s|Privoxy_Port2|$Privoxy_Port2|g" /etc/privoxy/config
+
 # set time GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
+mkdir /etc/ssl/zerossl.my.id/
 
 # install
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
-#echo "clear" >> .profile
 #echo "neofetch" >> .profile
 echo "status" >> .profile
 
 # install webserver
 apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
-curl https://${akbarvpn}/nginx.conf > /etc/nginx/nginx.conf
-curl https://${akbarvpn}/vps.conf > /etc/nginx/conf.d/vps.conf
+rm /etc/nginx/sites-enabled/
+rm /etc/nginx/sites-available/
+curl https://${wisnuvpn}/nginx.conf > /etc/nginx/nginx.conf
+curl https://${wisnuvpn}/vps.conf > /etc/nginx/conf.d/vps.conf
 sed -i 's/listen = \/var\/run\/php-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/fpm/pool.d/www.conf
 useradd -m vps;
 mkdir -p /home/vps/public_html
@@ -214,24 +218,19 @@ chmod +x /usr/bin/badvpn-udpgw
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500' /etc/rc.local
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7400 --max-clients 500
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7500 --max-clients 500
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7600 --max-clients 500
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7700 --max-clients 500
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7800 --max-clients 500
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900 --max-clients 500
-
+sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7400 --max-clients 500' /etc/rc.local
+sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7500 --max-clients 500' /etc/rc.local
+sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7600 --max-clients 500' /etc/rc.local
+sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7700 --max-clients 500' /etc/rc.local
+sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7800 --max-clients 500' /etc/rc.local
+sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900 --max-clients 500' /etc/rc.local
 # setting port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
-
 # install dropbear
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=200/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 300"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
@@ -245,7 +244,6 @@ sed -i $MYIP2 /etc/squid/squid.conf
 # Install SSLH
 apt -y install sslh
 rm -f /etc/default/sslh
-
 # Settings SSLH
 cat > /etc/default/sslh <<-END
 # Default options for sslh initscript
@@ -265,8 +263,23 @@ RUN=yes
 # systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:777 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
 
+END
+# Service SSLH systemctl restart sslh
+cat > /lib/systemd/system/sslh.service <<-END
+[Unit]
+Description=SSH MULTIPLEXLER CILEGON BANTEN BY WISNU
+After=network.target
+Documentation=http://t.me/zerossl
+
+[Service]
+EnvironmentFile=/etc/default/sslh
+ExecStart=/usr/sbin/sslh --foreground $DAEMON_OPTS
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
 END
 
 # Restart Service SSLH
@@ -293,64 +306,101 @@ systemctl enable vnstat
 rm -f /root/vnstat-2.6.tar.gz
 rm -rf /root/vnstat-2.6
 
-function InsStunnel(){
- StunnelDir=$(ls /etc/default | grep stunnel | head -n1)
+# install stunnel 5 
+cd /root/
+wget -q -O stunnel5.zip "https://${wisnuvpnnnn}/stunnel5.zip"
+unzip -o stunnel5.zip
+cd /root/stunnel
+chmod +x configure
+./configure
+make
+make install
+cd /root
+rm -r -f stunnel
+rm -f stunnel5.zip
+mkdir -p /etc/stunnel5
+chmod 644 /etc/stunnel5
 
- # Creating stunnel startup config using cat eof tricks
-# My Stunnel Config
-ENABLED=1
-FILES="/etc/stunnel/stunnel.conf"
-OPTIONS=""
-BANNER="/etc/banner"
-PPP_RESTART=0
-# RLIMITS="-n 4096 -d unlimited"
-RLIMITS=""
-MyStunnelD
+# Download Config Stunnel5
+cat > /etc/stunnel5/stunnel5.conf <<-END
+cert= /etc/xray/xray.crt
+key= /etc/xray/xray.key
+#cert= /etc/stunnel5/stunel5.pem
 
- # Removing all stunnel folder contents
- rm -rf /etc/stunnel/*
- 
- # Creating stunnel certifcate using openssl
-openssl req -new -x509 -days 9999 -nodes -subj "/C=ID/ST=Jawa_Tengah/L=Sukoharjo/O=GANDRING/OU=GANDRING/CN=GANDRING" -out /etc/stunnel/stunnel.pem -keyout /etc/stunnel/stunnel.pem &> /dev/null
-##  > /dev/null 2>&1
-
- # Creating stunnel server config
-cat > /etc/stunnel/stunnel.conf << END
-# My Stunnel Config
-pid = /var/run/stunnel.pid
-cert = /etc/stunnel/stunnel.pem
 client = no
+socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
-TIMEOUTclose = 0
 
 [dropbear]
-accept = 445
-connect = 127.0.0.1:109
+accept = 600
+connect = 127.0.0.1:200
+
+[dropbear]
+accept = 700
+connect = 127.0.0.1:300
 
 [openssh]
-accept = 500
+accept = 800
 connect = 127.0.0.1:22
 
 [openssh]
-accept = 777
+accept = 500
 connect = 127.0.0.1:443
 
 [openvpn]
 accept = 990
 connect = 127.0.0.1:1194
+
 END
 
- # setting stunnel ports
-sed -i "s|Stunnel_Port1|$Stunnel_Port1|g" /etc/stunnel/stunnel.conf
-sed -i "s|dropbear_port_c|$(netstat -tlnp | grep -i dropbear | awk '{print $4}' | cut -d: -f2 | xargs | awk '{print $2}' | head -n1)|g" /etc/stunnel/stunnel.conf
-sed -i "s|Stunnel_Port2|$Stunnel_Port2|g" /etc/stunnel/stunnel.conf
-sed -i "s|openssh_port_c|$(netstat -tlnp | grep -i ssh | awk '{print $4}' | cut -d: -f2 | xargs | awk '{print $2}' | head -n1)|g" /etc/stunnel/stunnel.conf
+#make a certificate
+##openssl genrsa -out key.pem 2048
+#openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
+#-subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
+#cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
 
- # Restarting stunnel service
-systemctl daemon-reload
-systemctl restart stunnel4
-systemctl status stunnel4
+# Service Stunnel5 systemctl restart stunnel5
+cat > /etc/systemd/system/stunnel5.service << END
+[Unit]
+Description=STUNNEL5 ROUTING GAJAH DEMAK BY WISNU
+Documentation=https://stunnel5.org
+Documentation=https://t.me/zerossl
+After=syslog.target network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
+END
+
+# Service Stunnel5 /etc/init.d/stunnel5
+wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
+
+# Ubah Izin Akses
+chmod 600 /etc/stunnel5/stunnel5.pem
+chmod +x /etc/init.d/stunnel5
+cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
+
+# Remove File
+rm -r -f /usr/local/share/doc/stunnel/
+rm -r -f /usr/local/etc/stunnel/
+rm -f /usr/local/bin/stunnel
+#rm -f /usr/local/bin/stunnel3
+rm -f /usr/local/bin/stunnel4
+#rm -f /usr/local/bin/stunnel5
+
+# Restart Stunnel 5
+systemctl stop stunnel5
+systemctl enable stunnel5
+systemctl start stunnel5
+systemctl restart stunnel5
+/etc/init.d/stunnel5 restart
+/etc/init.d/stunnel5 status
+/etc/init.d/stunnel5 restart
+
 #OpenVPN
 wget https://${wisnuvpn}/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 
@@ -681,8 +731,7 @@ chmod +x addtrgo
 chmod +x deltrgo
 chmod +x renewtrgo
 chmod +x cektrgo
-echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
-echo "0 0 * * * root xp" >> /etc/crontab
+
 # remove unnecessary files
 cd
 apt autoclean -y
@@ -702,10 +751,11 @@ chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/dropbear restart
 /etc/init.d/fail2ban restart
 /etc/init.d/sslh restart
-/etc/init.d/stunnel4 restart
+/etc/init.d/stunnel5 restart
 /etc/init.d/vnstat restart
-/etc/init.d/fail2ban restart
-/etc/init.d/squid restart
+#/etc/init.d/fail2ban restart
+#/etc/init.d/squid restart
+
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
@@ -715,6 +765,8 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7600 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7700 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7800 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900 --max-clients 500
+echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
+echo "0 0 * * * root xp" >> /etc/crontab
 history -c
 echo "unset HISTFILE" >> /etc/profile
 
@@ -723,5 +775,5 @@ rm -f /root/key.pem
 rm -f /root/cert.pem
 rm -f /root/ssh-vpn.sh
 
-# finihsing
+# finishing
 clear
