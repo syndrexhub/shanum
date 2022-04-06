@@ -244,10 +244,10 @@ wget -O /etc/squid/squid.conf "https://${wisnuvpn}/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf
 
 # Install SSLH
-apt -y install sslh
-rm -f /etc/default/sslh
+#apt -y install sslh
+#rm -f /etc/default/sslh
 # Settings SSLH
-cat > /etc/default/sslh <<-END
+#cat > /etc/default/sslh <<-END
 # Default options for sslh initscript
 # sourced by /etc/init.d/sslh
 
@@ -263,35 +263,35 @@ RUN=yes
 
 # binary to use: forked (sslh) or single-thread (sslh-select) version
 # systemd users: don't forget to modify /lib/systemd/system/sslh.service
-DAEMON=/usr/sbin/sslh
+#DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:8443 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
-END
+#DAEMON_OPTS="--user sslh --listen 0.0.0.0:8443 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
+#END
 
 # Service SSLH systemctl restart sslh
-cat > /lib/systemd/system/sslh.service << END
+#cat > /lib/systemd/system/sslh.service << END
 [Unit]
-Description=SSH MULTIPLEXLER CILEGON BANTEN BY ZEROSSL
-After=syslog.target network-online.target
-Documentation=http://t.me/zerossl
+#Description=SSH MULTIPLEXLER CILEGON BANTEN BY ZEROSSL
+#After=syslog.target network-online.target
+#Documentation=http://t.me/zerossl
 
-[Service]
-EnvironmentFile=/etc/default/sslh
-ExecStart=/usr/sbin/sslh --foreground $DAEMON_OPTS
-KillMode=process
+#[Service]
+#EnvironmentFile=/etc/default/sslh
+#ExecStart=/usr/sbin/sslh --foreground $DAEMON_OPTS
+#KillMode=process
 
-[Install]
-WantedBy=multi-user.target.wants
-END
+#[Install]
+#WantedBy=multi-user.target.wants
+#END
 
 # Restart Service SSLH
-systemctl daemon-reload
-systemctl enable sslh
-service sslh restart
-systemctl restart sslh
-/etc/init.d/sslh restart
-/etc/init.d/sslh status
-/etc/init.d/sslh restart
+#systemctl daemon-reload
+#systemctl enable sslh
+#service sslh restart
+#systemctl restart sslh
+#/etc/init.d/sslh restart
+#/etc/init.d/sslh status
+#/etc/init.d/sslh restart
 
 # setting vnstat
 apt -y install vnstat
@@ -348,8 +348,8 @@ accept = 800
 connect = 127.0.0.1:22
 
 [ws-stunnel]
-accept = 500
-connect = 127.0.0.1:8443
+accept = 8443
+connect = 127.0.0.1:443
 
 [openvpn]
 accept = 990
