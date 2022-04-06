@@ -9,10 +9,9 @@ BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
-# ==========================================
+
 # Getting
-MYIP=$(wget -qO- ipinfo.io/ip);
-# ==================================================
+MYIP=$(wget -qO- https://icanhazip.com);
 # Link Hosting Kalian
 wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/ssh"
 
@@ -135,10 +134,11 @@ apt install libreadline-dev -y
 apt install zlib1g-dev -y
 apt install libssl-dev -y
 apt install libssl1.0-dev -y
+apt install libssl2.0-dev -y
+apt install linssl3.0-dev -y
 gem install lolcat
 apt install jq curl -y
 apt install dnsutils jq -y
-apt-get install net-tools -y
 apt-get install tcpdump -y
 apt-get install dsniff -y
 apt install grepcidr -y
@@ -374,7 +374,7 @@ ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
 Type=forking
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target.wants
 END
 
 # Service Stunnel5 /etc/init.d/stunnel5
