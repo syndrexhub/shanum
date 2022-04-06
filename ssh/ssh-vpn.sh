@@ -46,15 +46,11 @@ email=djarumpentol01@gmail.com
 wget -O /etc/pam.d/common-password "https://${wisnuvpn}/password"
 chmod +x /etc/pam.d/common-password
 
-# go to root
-cd
-
 # Edit file /etc/systemd/system/rc-local.service
 cat > /etc/systemd/system/rc-local.service <<-END
 [Unit]
 Description=/etc/rc.local
 ConditionPathExists=/etc/rc.local
-
 [Service]
 Type=forking
 ExecStart=/etc/rc.local start
@@ -62,7 +58,6 @@ TimeoutSec=0
 StandardOutput=tty
 RemainAfterExit=yes
 SysVStartPriority=99
-
 [Install]
 WantedBy=multi-user.target
 END
@@ -148,7 +143,8 @@ Privoxy_Port1='4000'
 Privoxy_Port2='5000'
 
  # Creating Privoxy server config using cat eof tricks
- cat <<'privoxy' > /etc/privoxy/config
+cd
+cat <<'privoxy' > /etc/privoxy/config
 # My Privoxy Server Config
 user-manual /usr/share/doc/privoxy/user-manual
 confdir /etc/privoxy
@@ -209,7 +205,6 @@ chmod -R g+rw /home/vps/public_html
 cd /home/vps/public_html
 wget -O /home/vps/public_html/index.html "https://${wisnuvpn}/index.html"
 /etc/init.d/nginx restart
-cd
 
 # install badvpn
 cd
@@ -244,8 +239,8 @@ wget -O /etc/squid/squid.conf "https://${wisnuvpn}/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf
 
 # Install SSLH
-#apt -y install sslh
-#rm -f /etc/default/sslh
+apt -y install sslh
+rm -f /etc/default/sslh
 # Settings SSLH
 #cat > /etc/default/sslh <<-END
 # Default options for sslh initscript
@@ -269,6 +264,7 @@ DAEMON_OPTS="--user sslh --listen 0.0.0.0:8443 --ssl 127.0.0.1:500 --ssh 127.0.0
 END
 
 # Service SSLH systemctl restart sslh
+cd
 cat > /lib/systemd/system/sslh.service << END
 [Unit]
 Description=SSH MULTIPLEXLER CILEGON BANTEN BY ZEROSSL
@@ -325,10 +321,11 @@ mkdir -p /etc/stunnel5
 chmod 644 /etc/stunnel5
 
 # Download Config Stunnel5
+cd
 cat > /etc/stunnel5/stunnel5.conf <<-END
-#cert= /etc/xray/xray.crt
-#key= /etc/xray/xray.key
-cert= /etc/stunnel5/stunel5.pem
+cert.pem= /etc/xray/xray.crt
+key.pem= /etc/xray/xray.key
+#cert= /etc/stunnel5/stunel5.pem
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
@@ -347,20 +344,21 @@ accept = 800
 connect = 127.0.0.1:22
 
 [ws-stunnel]
-accept = 8443
-connect = 127.0.0.1:443
+accept = 500
+connect = 127.0.0.1:8443
 
 [openvpn]
 accept = 990
 connect = 127.0.0.1:1194
 END
 #make a certificate
-openssl genrsa -out key.pem 2048
-openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
--subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
-cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
+#openssl genrsa -out key.pem 2048
+#openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
+#-subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
+#cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
 
 # Service Stunnel5 systemctl restart stunnel5
+cd
 cat > /etc/systemd/system/stunnel5.service << END
 [Unit]
 Description=STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING
@@ -380,6 +378,7 @@ END
 #wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
 
 # Ubah Izin Akses
+cd
 chmod 600 /etc/stunnel5/stunnel5.pem
 chmod +x /etc/init.d/stunnel5
 cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
