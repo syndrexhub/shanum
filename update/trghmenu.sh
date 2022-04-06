@@ -26,10 +26,6 @@ echo -e "07\e[1;33m) Perpanjang Masa Aktif Akun TROJAN GO \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "08\e[1;33m) Cek User Login TROJAN GO \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "09\e[1;33m) Buat Akun TROJAN TESTER \e[m"
-echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "10\e[1;33m) Hapus Akun TROJAN TESTER \e[m"
-echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e " 0\e[1;31m) Menu Utama \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e " x\e[1;31m) Keluar \e[m"
@@ -62,12 +58,6 @@ renewtrgo
 ;;
 8)
 cektrgo
-;;
-9)
-addnewtr
-;;
-10)
-delnewtr
 ;;
 0)
 clear
