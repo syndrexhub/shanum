@@ -98,7 +98,7 @@ else
 fi
 if [[ $status03 == "" ]]; then
       sstatus03=$ERROR
-      ingfo+=("STUNNEL")
+      ingfo+=("STUNNEL5")
       dahlah+=("err3")
 else
       sstatus03=$AKTIF
