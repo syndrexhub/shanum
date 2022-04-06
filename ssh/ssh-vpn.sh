@@ -551,6 +551,7 @@ wget -O cekxtlstrojan "https://${wisnuvpnn}/cekxtlstrojan.sh"
 wget -O cekgrpctrojan "https://${wisnuvpnn}/cekgrpctrojan.sh"
 wget -O cektrojanwss "https://${wisnuvpnn}/cektrojanwss.sh"
 wget -O cektrojanhttp "https://${wisnuvpnn}/cektrojanhttp.sh"
+wget -O ceknewtr "https://${wisnuvpnn}/ceknewtr.sh"
 
 wget -O renewvmess "https://${wisnuvpnn}/renewvmess.sh"
 wget -O renewvmessgrpc "https://${wisnuvpnn}/renewvmessgrpc.sh"
@@ -597,7 +598,9 @@ wget -O vlessmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/mai
 wget -O trghmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trghmenu.sh"
 wget -O trxtmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/trxtmenu.sh"
 wget -O setmenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/setmenu.sh"
-
+wget -O testermenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/update/testermenu.sh"
+chmod +x testermenu
+chmod +x ceknewtr
 chmod +x addnewtr
 chmod +x addnewvmess
 chmod +x addnewvless
