@@ -67,7 +67,6 @@ SysVStartPriority=99
 WantedBy=multi-user.target
 END
 
-
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
 #!/bin/sh -e
@@ -267,8 +266,8 @@ RUN=yes
 DAEMON=/usr/sbin/sslh
 
 DAEMON_OPTS="--user sslh --listen 127.0.0.1:8443 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
-
 END
+
 # Service SSLH systemctl restart sslh
 cat > /lib/systemd/system/sslh.service << END
 [Unit]
