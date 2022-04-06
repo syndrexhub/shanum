@@ -38,7 +38,7 @@ if [[ -e /etc/wireguard/params ]]; then
 	exit 1
 fi
 echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-${Info}       🔰 Wireguard Script By WISNUCOKROSATRIO 🔰                \e[m"
+${Info} instalasi Wireguard Script By zerossl
 echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 # Detect public IPv4 address and pre-fill for the user
 
@@ -91,6 +91,7 @@ iptables -I INPUT 1 -i wg0 -j ACCEPT
 iptables -I FORWARD 1 -i $SERVER_PUB_NIC -o wg0 -j ACCEPT
 iptables -I FORWARD 1 -i wg0 -o $SERVER_PUB_NIC -j ACCEPT
 iptables -I INPUT 1 -i $SERVER_PUB_NIC -p udp --dport 591 -j ACCEPT
+iptables -I INPUT 1 -i $SERVER_PUB_NIC -p tcp --dport 591 -j ACCEPT
 iptables-save > /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
