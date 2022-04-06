@@ -35,7 +35,7 @@ cat > /etc/shadowsocks-rust/config.json <<-EOF
     "servers": [
         {
             "address": "127.0.0.1",
-            "server_port":50003,
+            "server_port":50001,
             "service_port":2081,
             "password": "gandring",
             "method":"none",
@@ -45,8 +45,8 @@ cat > /etc/shadowsocks-rust/config.json <<-EOF
         },
         {
             "address": "127.0.0.1",
-            "server_port":50203,
-            "service_port":8442,
+            "server_port":50002,
+            "service_port":2082,
             "password": "gandring",
             "method":"none",
             "fast_open":true,
@@ -73,8 +73,8 @@ EOF
 
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 50002 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 50002 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 50203 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 50203 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 50001 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 50001 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2081 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2081 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2082 -j ACCEPT
