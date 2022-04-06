@@ -40,7 +40,7 @@ status13=$(systemctl status squid            | grep -i "active (running)")
 status14=$(systemctl status cron             | grep -i "active (running)")
 status15=$(systemctl status fail2ban         | grep -i "active (running)")
 status16=$(systemctl status vnstat           | grep -i "active (running)")
-status17=$(systemctl status sslh             | grep -i "active (running)")
+#status17=$(systemctl status sslh             | grep -i "active (running)")
 status18=$(systemctl status privoxy          | grep -i "active (running)")
 status19=$(systemctl status ws-tls           | grep -i "active (running)")
 status19=$(systemctl status ws-nontls        | grep -i "active (running)")
@@ -612,7 +612,7 @@ echo -e "$bl🔰 $off $bd SQUID                       $off : $sstatus13🔰"
 echo -e "$bl🔰 $off $bd CRON                        $off : $sstatus14🔰"
 echo -e "$bl🔰 $off $bd FAIL2BAN                    $off : $sstatus15🔰"
 echo -e "$bl🔰 $off $bd VNSTAT                      $off : $sstatus16🔰"
-echo -e "$bl🔰 $off $bd SSLH                        $off : $sstatus17🔰"
+#echo -e "$bl🔰 $off $bd SSLH                        $off : $sstatus17🔰"
 echo -e "$bl🔰 $off $bd PRIVOXY                     $off : $sstatus18🔰"
 echo -e "$bl🔰 $off $bd WEBSOCKET TLS               $off : $sstatus19🔰"
 echo -e "$bl🔰 $off $bd WEBSOCKET NON TLS           $off : $sstatus19🔰"
