@@ -26,10 +26,10 @@ chronyc sourcestats -v
 chronyc tracking -v
 date
 
-wget -q -O /usr/local/xray/geosite.dat "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/geosite.dat"
-wget -q -O /usr/local/xray/geoip.dat "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/geoip.dat"
-chmod +x /usr/local/xray/xray
-#bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install-geodata
+#wget -q -O /usr/local/xray/geosite.dat "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/geosite.dat"
+#wget -q -O /usr/local/xray/geoip.dat "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/geoip.dat"
+#chmod +x /usr/local/xray/xray
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install-geodata
 # / / Ambil Xray Core Version Terbaru
 latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
 
