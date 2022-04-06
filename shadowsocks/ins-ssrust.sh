@@ -1,5 +1,6 @@
 #!/bin/bash
 cd ~
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/shadowsocks"
 rm -rf shadowsocks-v* xray-plugin* v2ray-plugin*
 lurl='https://api.github.com/repos/shadowsocks/shadowsocks-rust/releases/latest'
 latest_version=`curl $lurl| grep tag_name |awk -F '[:,"v]' '{print $6}'`
@@ -35,22 +36,22 @@ cat > /etc/shadowsocks-rust/config.json <<-EOF
         {
             "address": "127.0.0.1",
             "server_port":50003,
-            "service_port":2083,
+            "service_port":2081,
             "password": "gandring",
             "method":"aes-256-cfb",
             "fast_open":true,
             "plugin":"v2ray-plugin",
-            "plugin_opts":"server;tls;path=/ws;host=$domain;cert=/etc/xray/xray.crt;key=/etc/xray/xray.key;failover=127.0.0.1:443;fast-open"
+            "plugin_opts":"server;tls;path=/ws;host=$domain;cert=/etc/xray/xray.crt;key=/etc/xray/xray.key"
         },
         {
             "address": "127.0.0.1",
             "server_port":50203,
-            "service_port":8443,
+            "service_port":8442,
             "password": "gandring",
             "method":"aes-256-cfb",
             "fast_open":true,
             "plugin":"xray-plugin",
-            "plugin_opts":"server;mode=grpc;tls;host=$domain;cert=/etc/xray/xray.crt;key=/etc/xray/xray.key;failover=127.0.0.1:443;fast-open"
+            "plugin_opts":"serve;tls;path=/ws;host=$domain;cert=/etc/xray/xray.crt;key=/etc/xray/xray.key"
         }
     ]
 }
