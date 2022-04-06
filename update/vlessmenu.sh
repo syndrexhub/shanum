@@ -42,10 +42,6 @@ echo -e "15\e[1;33m)  Perpanjang Masa Aktif Akun VLESS HTTP/2 \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "16\e[1;33m)  Cek User Login VLESS HTTP/2 \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "17\e[1;33m)  Buat Akun VLESS KOMPLET TESTER \e[m"
-echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "18\e[1;33m)  Hapus Akun VLESS KOMPLET TESTER \e[m"
-echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "00\e[1;31m)  Menu Utama \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "xx\e[1;31m)  Keluar \e[m"
@@ -102,12 +98,6 @@ renewvlesshdua
 ;;
 16)
 cekvlesshdua
-;;
-17)
-addnewvless
-;;
-18)
-delnewvless
 ;;
 0)
 clear
