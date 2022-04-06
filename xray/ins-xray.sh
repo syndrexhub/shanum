@@ -717,7 +717,7 @@ cat > /etc/xray/xtrojan.json << END
         "decryption": "none",
         "fallbacks": [
           {
-            "dest": 2083,
+            "dest": 2022,
             "xver": 1
           },
           {
@@ -745,7 +745,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 2095,
+      "port": 2022,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-gRPC-in",
@@ -839,7 +839,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 2096,
+      "port": 2023,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-HTTP/2-in",
@@ -908,7 +908,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 2022,
+      "port": 2024,
       "listen": "0.0.0.0",
       "tag": "vless-http-in",
       "protocol": "vless",
