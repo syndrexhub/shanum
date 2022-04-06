@@ -265,13 +265,13 @@ RUN=yes
 # systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
+DAEMON_OPTS="--sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
 
 END
 # Service SSLH systemctl restart sslh
 cat > /lib/systemd/system/sslh.service <<-END
 [Unit]
-Description=SSH MULTIPLEXLER CILEGON BANTEN BY WISNU
+Description=SSH MULTIPLEXLER CILEGON BANTEN BY ZEROSSL
 After=network.target
 Documentation=http://t.me/zerossl
 
@@ -285,11 +285,11 @@ WantedBy=multi-user.target
 END
 
 # Restart Service SSLH
-service sslh restart
+systemctl daemon-reload
+systemctl enable sslh
 systemctl restart sslh
 /etc/init.d/sslh restart
 /etc/init.d/sslh status
-/etc/init.d/sslh restart
 
 # setting vnstat
 apt -y install vnstat
@@ -328,7 +328,6 @@ cat > /etc/stunnel5/stunnel5.conf <<-END
 cert= /etc/xray/xray.crt
 key= /etc/xray/xray.key
 #cert= /etc/stunnel5/stunel5.pem
-
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
@@ -353,9 +352,7 @@ connect = 127.0.0.1:443
 [openvpn]
 accept = 990
 connect = 127.0.0.1:1194
-
 END
-
 #make a certificate
 ##openssl genrsa -out key.pem 2048
 #openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
@@ -365,7 +362,7 @@ END
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
 [Unit]
-Description=STUNNEL5 ROUTING GAJAH DEMAK BY WISNU
+Description=STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING
 Documentation=https://stunnel5.org
 Documentation=https://t.me/zerossl
 After=syslog.target network-online.target
