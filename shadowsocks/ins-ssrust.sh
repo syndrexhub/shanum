@@ -38,7 +38,7 @@ cat > /etc/shadowsocks-rust/config.json <<-EOF
             "server_port":50003,
             "service_port":2081,
             "password": "gandring",
-            "method":"aes-256-cfb",
+            "method":"none",
             "fast_open":true,
             "plugin":"v2ray-plugin",
             "plugin_opts":"server;tls;path=/ws;host=$domain;cert=/etc/xray/xray.crt;key=/etc/xray/xray.key"
@@ -48,10 +48,10 @@ cat > /etc/shadowsocks-rust/config.json <<-EOF
             "server_port":50203,
             "service_port":8442,
             "password": "gandring",
-            "method":"aes-256-cfb",
+            "method":"none",
             "fast_open":true,
             "plugin":"xray-plugin",
-            "plugin_opts":"serve;tls;path=/ws;host=$domain;cert=/etc/xray/xray.crt;key=/etc/xray/xray.key"
+            "plugin_opts":"server;tls;path=/ws;host=$domain;cert=/etc/xray/xray.crt;key=/etc/xray/xray.key"
         }
     ]
 }
