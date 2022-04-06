@@ -260,15 +260,14 @@ RUN=yes
 # systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:8443 --ssl 127.0.0.1:500 --ssh 127.0.0.1:300 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid"
-END
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:2082 --ssh 127.0.0.1:300 --ssl 127.0.0.1:500 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
 
+END
 # Service SSLH systemctl restart sslh
-cd
 cat > /lib/systemd/system/sslh.service << END
 [Unit]
-Description=SSH MULTIPLEXLER CILEGON BANTEN BY ZEROSSL
-After=syslog.target network-online.target
+Description=SSH MULTIPLEXLER CILEGON BANTEN BY WISNU
+After=network.target
 Documentation=http://t.me/zerossl
 
 [Service]
@@ -277,17 +276,15 @@ ExecStart=/usr/sbin/sslh --foreground $DAEMON_OPTS
 KillMode=process
 
 [Install]
-WantedBy=multi-user.target.wants
+WantedBy=multi-user.target
 END
 
 # Restart Service SSLH
-systemctl daemon-reload
-systemctl enable sslh
+service sslh restart
 systemctl restart sslh
 /etc/init.d/sslh restart
 /etc/init.d/sslh status
 /etc/init.d/sslh restart
-
 # setting vnstat
 apt -y install vnstat
 /etc/init.d/vnstat restart
