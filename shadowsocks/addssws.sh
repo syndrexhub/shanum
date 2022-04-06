@@ -13,7 +13,7 @@ LIGHT='\033[0;37m'
 # ==========================================
 MYIP=$(wget -qO- ipinfo.io/ip);
 domain=$(cat /etc/xray/domain)
-wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/main/shadowsocks"
+wisnuvpn="raw.githubusercontent.com/wisnucokrosatrio/shanum/main/shadowsocks"
 
 source /var/lib/wisnucs/ipvps.conf
 if [[ "$IP2" = "" ]]; then
