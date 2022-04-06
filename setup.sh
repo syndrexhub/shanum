@@ -124,32 +124,32 @@ echo " 🔰 SS-OBFS TLS : 2444-2943" |tee -a log-install.txt
 echo " 🔰 SS-OBFS HTTP : 2944-3442" |tee -a log-install.txt
 echo " 🔰 XRAY SHADOWSOCKS : 333" |tee -a log-install.txt
 echo " 🔰 XRAY MTPROTO : 111" |tee -a log-install.txt
-echo " 🔰 WEBSOCKET TLS : 2082" |tee -a log-install.txt
-echo " 🔰 WEBSOCKET NON TLS : 443" |tee -a log-install.txt
+echo " 🔰 WEBSOCKET TLS : 8443" |tee -a log-install.txt
+echo " 🔰 WEBSOCKET NON TLS : 80" |tee -a log-install.txt
 echo " 🔰 PORT OVPNWS : 2086" |tee -a log-install.txt
 echo " 🔰 OHP SSH : 8181" |tee -a log-install.txt
 echo " 🔰 OHP Dropbear : 8282" |tee -a log-install.txt
 echo " 🔰 OHP OpenVPN : 8383" |tee -a log-install.txt
 echo " 🔰 VMESS WS TLS : 2053" |tee -a log-install.txt
 echo " 🔰 VMESS WS NON TLS : 2052" |tee -a log-install.txt
-echo " 🔰 VMESS GRPC : 2052" |tee -a log-install.txt
-echo " 🔰 VMESS H2C : 2443" |tee -a log-install.txt
-echo " 🔰 VMESS HTTP : 880" |tee -a log-install.txt
+echo " 🔰 VMESS GRPC : 443" |tee -a log-install.txt
+echo " 🔰 VMESS H2C : 443" |tee -a log-install.txt
+echo " 🔰 VMESS HTTP : 443" |tee -a log-install.txt
 echo " 🔰 VLESS XTLS : 99" |tee -a log-install.txt
-echo " 🔰 VLESS WS TLS : 2443" |tee -a log-install.txt
+echo " 🔰 VLESS WS TLS : 8880" |tee -a log-install.txt
 echo " 🔰 VLESS WS NON TLS : 8880" |tee -a log-install.txt
-echo " 🔰 VLESS GRPC : 8443" |tee -a log-install.txt
-echo " 🔰 VLESS H2C : 8443" |tee -a log-install.txt
+echo " 🔰 VLESS GRPC : 443" |tee -a log-install.txt
+echo " 🔰 VLESS H2C : 443" |tee -a log-install.txt
 echo " 🔰 TROJAN GO : 2087" |tee -a log-install.txt
-echo " 🔰 TROJAN GRPC : 2443" |tee -a log-install.txt
+echo " 🔰 TROJAN GRPC : 443" |tee -a log-install.txt
 echo " 🔰 TROJAN HTTP : 880" |tee -a log-install.txt
-echo " 🔰 TROJAN H2C : 2443" |tee -a log-install.txt
+echo " 🔰 TROJAN H2C : 443" |tee -a log-install.txt
 echo " 🔰 TROJAN XTLS : 4443" |tee -a log-install.txt
 echo " 🔰 TROJAN WS TLS : 2096" |tee -a log-install.txt
 echo " 🔰 TROJAN WS NON TLS : 2095" |tee -a log-install.txt
 echo " 🔰 SOCKS5 WEBSOCKET : 8880" |tee -a log-install.txt
-echo " 🔰 SHADOWSOCKS V2RAY WS : 2083" |tee -a log-install.txt
-echo " 🔰 SHADOWSOCKS XRAY WS : 8443" |tee -a log-install.txt
+echo " 🔰 SHADOWSOCKS V2RAY WS : 2082" |tee -a log-install.txt
+echo " 🔰 SHADOWSOCKS XRAY WS : 2083" |tee -a log-install.txt
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo " 🔰>> Server Information & Other Features"                  |tee -a log-install.txt
 echo " 🔰 Timezone                : Asia/Jakarta (GMT +7)"        |tee -a log-install.txt
