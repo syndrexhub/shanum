@@ -104,7 +104,7 @@ cat > /etc/xray/config.json << END
           {
             "id": "${uuid}",
             "flow": "xtls-rprx-direct"
-#xtls
+#vless-xtls
           }
         ],
         "decryption": "none",
@@ -144,7 +144,7 @@ cat > /etc/xray/config.json << END
       "domain": "$domain"
     },
     {
-      "port": 443,
+      "port": 2443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -303,7 +303,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 2443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -343,7 +343,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 2443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -469,7 +469,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 1443,
       "protocol": "vless",
       "settings": {
         "clients": [
