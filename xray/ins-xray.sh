@@ -747,7 +747,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 443,
+      "port": 3443,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-gRPC-in",
@@ -841,7 +841,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 443,
+      "port": 3443,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-HTTP/2-in",
