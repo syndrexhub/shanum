@@ -242,7 +242,7 @@ sed -i $MYIP2 /etc/squid/squid.conf
 apt -y install sslh
 rm -f /etc/default/sslh
 # Settings SSLH
-#cat > /etc/default/sslh <<-END
+cat > /etc/default/sslh <<-END
 # Default options for sslh initscript
 # sourced by /etc/init.d/sslh
 
