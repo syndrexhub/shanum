@@ -26,7 +26,7 @@ chronyc sourcestats -v
 chronyc tracking -v
 date
 
-bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install-geodata
+#bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install-geodata
 # / / Ambil Xray Core Version Terbaru
 latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
 
@@ -142,7 +142,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 2443,
+      "port": 443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -301,7 +301,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 2443,
+      "port": 443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -341,7 +341,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 8443,
+      "port": 443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -386,7 +386,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 3443,
+      "port": 8880,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -467,7 +467,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 8880,
+      "port": 443,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -701,7 +701,7 @@ cat > /etc/xray/xtrojan.json << END
   },
   "inbounds": [
     {
-      "port": 5443,
+      "port": 4443,
       "protocol": "trojan",
       "tag": "TROJAN-xtls-in",
       "settings": {
@@ -717,7 +717,7 @@ cat > /etc/xray/xtrojan.json << END
         "decryption": "none",
         "fallbacks": [
           {
-            "dest": 2022,
+            "dest": 443,
             "xver": 1
           },
           {
@@ -745,7 +745,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 2022,
+      "port": 443,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-gRPC-in",
@@ -839,7 +839,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 2023,
+      "port": 443,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-HTTP/2-in",
