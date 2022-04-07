@@ -22,6 +22,7 @@ wget -q -O /usr/local/bin/ws-nontls https://${wisnuvpn}/ws-nontls.py
 chmod +x /usr/local/bin/ws-nontls
 
 # Installing Service
+cd
 cat > /etc/systemd/system/ws-nontls.service << END
 [Unit]
 Description=SSHWS BENDUNG COLO PENGKOL BY GANDRING
