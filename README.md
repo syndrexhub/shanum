@@ -42,9 +42,14 @@ https://www.youtube.com
 Part 1: Update dan Upgrade
    <img src="https://img.shields.io/badge/Update%20Upgrade-green"> 
   ```html
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
+</p>
 apt-get update && apt-get upgrade -y && update-grub && sleep 2 && reboot
 ```
-  
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
+</p>
 ## 2.0
 Aktifkan Root Sementara
   ```html
@@ -74,9 +79,14 @@ cd
 Part 3: Install Semua Layanan VPN /Install All VPN Service
   <img src="https://img.shields.io/badge/Install_Semua_Layanan_VPN%20Batch-green">
   ```html
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
+</p>
 rm -f setup.sh && apt install -y bzip2 gzip coreutils screen curl unzip && wget https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
 ```
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
+</p>
 ### 4. DONE / SELESAI
 * • jika tidak bisa login di vps ,gunakan port ssh
 * • 22, 2253
