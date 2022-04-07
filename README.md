@@ -40,15 +40,11 @@ https://www.youtube.com
 ## Installation 
 ## 1.
 Part 1: Update dan Upgrade
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
-</p>
-```
+   <img src="https://img.shields.io/badge/Update%20Upgrade-green"> 
+  ```html
 apt-get update && apt-get upgrade -y && update-grub && sleep 2 && reboot
 ```
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
-</p>
+  
 ## 2.0
 Aktifkan Root Sementara
   ```html
@@ -76,19 +72,11 @@ cd
   ```
 ### 3.
 Part 3: Install Semua Layanan VPN /Install All VPN Service
- <img src="https://img.shields.io/badge/Install_Semua_Layanan_VPN%20Batch-green">
+  <img src="https://img.shields.io/badge/Install_Semua_Layanan_VPN%20Batch-green">
   ```html
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
-</p>
-
-```
-rm -f setup.sh && apt install -y bzip2 gzip coreutils screen curl unzip && wget https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
+rm -f setup.sh && apt update && apt upgrade -y && update-grub && sleep 2 && apt-get update -y && sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt install -y bzip2 gzip coreutils screen curl unzip && wget https://raw.githubusercontent.com/wisnucokrosatrio/wisnucokrosatrio/master/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
 ```
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
-</p>
 ### 4. DONE / SELESAI
 * • jika tidak bisa login di vps ,gunakan port ssh
 * • 22, 2253
