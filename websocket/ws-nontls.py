@@ -77,9 +77,7 @@ class Server(threading.Thread):
             for c in threads:
                 c.close()
         finally:
-            self.threadsLock.release()
-
-
+            self.threadsLock.release(
 class ConnectionHandler(threading.Thread):
     def __init__(self, socClient, server, addr):
         threading.Thread.__init__(self)
@@ -170,11 +168,6 @@ class ConnectionHandler(threading.Thread):
             if self.method=='CONNECT':
                 port = 443
             else:
-                port = 80
-                port = 4000
-                port = 3128
-                port = 8080
-                port = 5000
                 port = sys.argv[1]
 
         (soc_family, soc_type, proto, _, address) = socket.getaddrinfo(host, port)[0]
