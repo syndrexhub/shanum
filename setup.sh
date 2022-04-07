@@ -125,7 +125,7 @@ echo " 🔰 SS-OBFS HTTP : 2944-3442" |tee -a log-install.txt
 echo " 🔰 XRAY SHADOWSOCKS : 333" |tee -a log-install.txt
 echo " 🔰 XRAY MTPROTO : 111" |tee -a log-install.txt
 echo " 🔰 WEBSOCKET TLS : 8443" |tee -a log-install.txt
-echo " 🔰 WEBSOCKET NON TLS : 80" |tee -a log-install.txt
+echo " 🔰 WEBSOCKET NON TLS : 8880" |tee -a log-install.txt
 echo " 🔰 PORT OVPNWS : 2086" |tee -a log-install.txt
 echo " 🔰 OHP SSH : 8181" |tee -a log-install.txt
 echo " 🔰 OHP Dropbear : 8282" |tee -a log-install.txt
@@ -147,7 +147,7 @@ echo " 🔰 TROJAN H2C : 443" |tee -a log-install.txt
 echo " 🔰 TROJAN XTLS : 4443" |tee -a log-install.txt
 echo " 🔰 TROJAN WS TLS : 2096" |tee -a log-install.txt
 echo " 🔰 TROJAN WS NON TLS : 2095" |tee -a log-install.txt
-echo " 🔰 SOCKS5 WEBSOCKET : 8880" |tee -a log-install.txt
+echo " 🔰 SOCKS5 WEBSOCKET : 2096" |tee -a log-install.txt
 echo " 🔰 SHADOWSOCKS V2RAY WS : 2082" |tee -a log-install.txt
 echo " 🔰 SHADOWSOCKS XRAY WS : 2083" |tee -a log-install.txt
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
