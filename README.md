@@ -40,25 +40,15 @@ https://www.youtube.com
 ## Installation 
 ## 1.
 Part 1: Update dan Upgrade
-
-```
-   <img src="https://img.shields.io/badge/Update%20Upgrade-green"> 
-  ```html
-
-```
 <p align="center">
   <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
 </p>
 ```
-
 apt-get update && apt-get upgrade -y && update-grub && sleep 2 && reboot
-
 ```
 <p align="center">
   <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
 </p>
-```
-
 ## 2.0
 Aktifkan Root Sementara
   ```html
