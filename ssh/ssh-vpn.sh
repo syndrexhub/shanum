@@ -260,7 +260,7 @@ RUN=yes
 # systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:2082 --ssh 127.0.0.1:300 --ssl 127.0.0.1:500 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:8443 --ssh 127.0.0.1:300 --ssl 127.0.0.1:500 --openvpn 127.0.0.1:1194 --http 127.0.0.1:80 --pidfile /var/run/sslh/sslh.pid -n"
 
 END
 # Service SSLH systemctl restart sslh
@@ -319,10 +319,10 @@ chmod 644 /etc/stunnel5
 
 # Download Config Stunnel5
 cd
+cert=/etc/stunnel5/stunel5.pem
 cat > /etc/stunnel5/stunnel5.conf <<-END
 #cert.pem= /etc/xray/xray.crt
 #key.pem= /etc/xray/xray.key
-cert= /etc/stunnel5/stunel5.pem
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
@@ -337,12 +337,12 @@ accept = 700
 connect = 127.0.0.1:300
 
 [openssh]
-accept = 800
+accept = 500
 connect = 127.0.0.1:22
 
 [ws-stunnel]
-accept = 500
-connect = 127.0.0.1:8443
+accept = 8443
+connect = 127.0.0.1:443
 
 [openvpn]
 accept = 990
@@ -355,7 +355,6 @@ openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
 cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
 
 # Service Stunnel5 systemctl restart stunnel5
-cd
 cat > /etc/systemd/system/stunnel5.service << END
 [Unit]
 Description=STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING
@@ -368,11 +367,11 @@ ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
 Type=forking
 
 [Install]
-WantedBy=multi-user.target.wants
+WantedBy=multi-user.target
 END
 
 # Service Stunnel5 /etc/init.d/stunnel5
-#wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
+wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
 
 # Ubah Izin Akses
 cd
@@ -384,7 +383,7 @@ cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
 rm -r -f /usr/local/share/doc/stunnel/
 rm -r -f /usr/local/etc/stunnel/
 rm -f /usr/local/bin/stunnel
-#rm -f /usr/local/bin/stunnel3
+rm -f /usr/local/bin/stunnel3
 rm -f /usr/local/bin/stunnel4
 #rm -f /usr/local/bin/stunnel5
 
