@@ -376,7 +376,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 3443,
+      "port": 2083,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -422,7 +422,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 8880,
+      "port": 2082,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -457,7 +457,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 8880,
+      "port": 2082,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -537,7 +537,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 8880,
+      "port": 2083,
       "protocol": "socks",
       "settings": {
         "auth": "password",
@@ -734,7 +734,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 6443,
+      "port": 2095,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-gRPC-in",
