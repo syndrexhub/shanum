@@ -45,6 +45,7 @@ Part 1: Update dan Upgrade
 ```
 <p align="center">
   <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
+```
 </p>
 apt-get update && apt-get upgrade -y && update-grub && sleep 2 && reboot
 <p align="center">
@@ -78,13 +79,16 @@ cd
   ```
 ### 3.
 Part 3: Install Semua Layanan VPN /Install All VPN Service
-  <img src="https://img.shields.io/badge/Install_Semua_Layanan_VPN%20Batch-green">
+```
+ <img src="https://img.shields.io/badge/Install_Semua_Layanan_VPN%20Batch-green">
   ```html
 ```
 <p align="center">
   <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
 </p>
+```
 rm -f setup.sh && apt install -y bzip2 gzip coreutils screen curl unzip && wget https://raw.githubusercontent.com/wisnucokrosatrio/shanum/main/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
+```
 <p align="center">
   <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
 </p>
