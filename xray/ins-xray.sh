@@ -139,7 +139,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 880,
+      "port": 443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -291,7 +291,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 2443,
+      "port": 443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -331,7 +331,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 2443,
+      "port": 443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -376,7 +376,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 3443,
+      "port": 2083,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -422,42 +422,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 8880,
-      "protocol": "vless",
-      "settings": {
-        "clients": [
-          {
-            "id": "${uuid}"
-#vless-nontls
-          }
-        ],
-        "decryption": "none"
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "tlsSettings": {},
-        "tcpSettings": {},
-        "kcpSettings": {},
-        "httpSettings": {},
-        "wsSettings": {
-          "path": "gandring",
-          "headers": {
-            "Host": "${domain}"
-          }
-        },
-        "quicSettings": {}
-      },
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
-    {
-      "port": 8880,
+      "port": 443,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -506,6 +471,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "method": "chacha20-poly1305",
         "password": "gandring",
+#xray-ss
         "network": "tcp,udp"
       },
       "sniffing": {
@@ -537,7 +503,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 8880,
+      "port": 2082,
       "protocol": "socks",
       "settings": {
         "auth": "password",
