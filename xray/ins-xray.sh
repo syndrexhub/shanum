@@ -853,6 +853,63 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
+      "port": 2022,
+      "listen": "0.0.0.0",
+      "tag": "vless-http-in",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "gandring"
+            "email": "gandring@p0x.smule.my.id"
+#vless-http
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {
+          "header": {
+            "type": "http",
+            "response": {
+              "version": "1.1",
+              "status": "200",
+              "reason": "OK",
+              "headers": {
+                "Content-Type": [
+                  "application/octet-stream",
+                  "video/mpeg",
+                  "application/x-msdownload",
+                  "text/html",
+                  "application/x-shockwave-flash"
+                ],
+                "Transfer-Encoding": [
+                  "chunked"
+                ],
+                "Connection": [
+                  "keep-alive"
+                ],
+                "Pragma": "no-cache"
+              }
+            }
+          }
+        },
+        "security": "tls"
+         "tlsSettings": {
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ]
+        }
+      }
+    },
+    {
       "port": 2096,
       "listen": "0.0.0.0",
       "protocol": "trojan",
