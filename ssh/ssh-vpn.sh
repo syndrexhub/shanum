@@ -74,7 +74,8 @@ END
 chmod +x /etc/rc.local
 
 # enable rc local
-systemctl enable rc-local
+systemctl daemon-reload
+systemctl enable rc-local.service
 systemctl start rc-local.service
 
 #update
@@ -88,7 +89,8 @@ rm -rf /etc/apache2
 
 # install wget and curl
 apt -y install wget curl
-
+apt install ssl-cert -y
+apt install ca-certificate-y
 # Install Requirements Tools
 apt install ruby -y
 apt install python -y
@@ -108,6 +110,7 @@ apt install nano -y
 apt install sed -y
 apt install gnupg -y
 apt install gnupg1 -y
+apt install gnupg2 -y
 apt install bc -y
 apt install jq -y
 apt install apt-transport-https -y
@@ -301,8 +304,9 @@ rm -rf /root/vnstat-2.6
 
 # Download Config Stunnel5
 apt install stunnel4 -y
-cert=/etc/stunnel5/stunel5.pem
-cat > /etc/stunnel/stunnel.conf <<-END
+cert = /etc/stunnel4/stunel4.pem
+pid = /var/run/stunnel4.pid
+cat > /etc/stunnel4/stunnel4.conf <<-END
 #cert.pem = /etc/xray/xray.crt
 #key.pem = /etc/xray/xray.key
 client = no
@@ -332,10 +336,8 @@ connect = 127.0.0.1:1194
 END
 
 #make a certificate
-openssl genrsa -out key.pem 2048
-openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
--subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
-cat cert.pem key.pem >> /etc/stunnel/stunnel.pem
+openssl req -new -x509 -days 9999 -nodes -subj "/C=ID/ST=JAWA_TENGAH/L=SUKOHARJO/O=GANDRING_VPN/OU=GANDRING_VPN/CN=GANDRING_VPN" -out /etc/stunnel4/stunnel4.pem -keyout /etc/stunnel4/stunnel4.pem &> /dev/null
+##  > /dev/null 2>&1
 
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel4.service << END
@@ -346,7 +348,7 @@ Documentation=https://t.me/zerossl
 After=syslog.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/stunnel -config /etc/stunnel/stunnel4.conf
+ExecStart=/usr/local/bin/stunnel4 -config /etc/stunnel4/stunnel4.conf
 Type=forking
 
 [Install]
