@@ -345,6 +345,7 @@ connect = 127.0.0.1:8443
 accept = 990
 connect = 127.0.0.1:1194
 END
+
 #make a certificate
 openssl genrsa -out key.pem 4096
 openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
@@ -372,9 +373,10 @@ wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
 
 # Ubah Izin Akses
 cd
+cert=/etc/stunnel5/stunel5.pem
 chmod 600 /etc/stunnel5/stunnel5.pem
 chmod +x /etc/init.d/stunnel5
-cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
+cp /usr/local/bin/stunnel /usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
 
 # Remove File
 rm -rf /usr/local/share/doc/stunnel/
