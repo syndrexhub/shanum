@@ -238,7 +238,7 @@ sed -i $MYIP2 /etc/squid/squid.conf
 apt -y install sslh
 rm -f /etc/init.d/sslh
 # Settings SSLH
-cat > /etc/default/sslh <<-END
+cat > /etc/init.d/sslh <<-END
 # Default options for sslh initscript
 # sourced by /etc/init.d/sslh
 
@@ -268,7 +268,7 @@ After=network.target
 Documentation=http://t.me/zerossl
 
 [Service]
-EnvironmentFile=/etc/default/sslh
+EnvironmentFile=/etc/init.d/sslh
 ExecStart=/usr/sbin/sslh --foreground $DAEMON_OPTS
 KillMode=process
 
@@ -318,8 +318,8 @@ chmod 644 /etc/stunnel5
 cd
 cert=/etc/stunnel5/stunel5.pem
 cat > /etc/stunnel5/stunnel5.conf <<-END
-cert.pem = /etc/xray/xray.crt
-key.pem = /etc/xray/xray.key
+#cert.pem = /etc/xray/xray.crt
+#key.pem = /etc/xray/xray.key
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
@@ -361,7 +361,7 @@ Documentation=https://t.me/zerossl
 After=syslog.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
+ExecStart=/usr/local/bin/stunnel -config /etc/stunnel5/stunnel5.conf
 Type=forking
 
 [Install]
