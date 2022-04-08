@@ -323,8 +323,8 @@ accept = 800
 connect = 127.0.0.1:22
 
 [openssh]
-accept = 500
-connect = 127.0.0.1:8443
+accept = 8443
+connect = 127.0.0.1:443
 
 [openvpn]
 accept = 990
@@ -338,7 +338,7 @@ openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
 cat cert.pem key.pem >> /etc/stunnel/stunnel.pem
 
 # Service Stunnel5 systemctl restart stunnel5
-cat > /etc/systemd/system/stunnel5.service << END
+cat > /etc/systemd/system/stunnel4.service << END
 [Unit]
 Description=STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING
 Documentation=https://stunnel.org
@@ -354,7 +354,7 @@ WantedBy=multi-user.target
 END
 
 # Service Stunnel5 /etc/init.d/stunnel5
-#wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
+wget -q -O /etc/init.d/stunnel4 "https://${wisnuvpnnnn}/stunnel4.init"
 
 # Ubah Izin Akses
 cd
