@@ -501,6 +501,51 @@ cat > /etc/xray/config.json << END
       }
     },
     {
+      "port": 2083,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "${uuid}"
+#vless-hdua
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "h2",
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ],
+          "alpn": [
+            "http/1.1"
+          ]
+        },
+        "tcpSettings": {},
+        "kcpSettings": {},
+        "wsSettings": {},
+        "httpSettings": {
+          "path": "gandring",
+            "Host": "${domain}"
+          }
+        },
+        "quicSettings": {}
+      },
+      "domain": "${domain}",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
       "port": 333,
       "protocol": "shadowsocks",
       "settings": {
