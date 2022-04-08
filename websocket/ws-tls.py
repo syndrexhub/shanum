@@ -4,14 +4,13 @@ import socket, threading, thread, select, signal, sys, time, getopt
 # Listen
 LISTENING_ADDR = '0.0.0.0'
 LISTENING_PORT = sys.argv[1]
-
 # Pass
 PASS = ''
 
 # CONST
 BUFLEN = 4096 * 4
 TIMEOUT = 60
-DEFAULT_HOST = '127.0.0.1:8443'
+DEFAULT_HOST = '127.0.0.1:443'
 RESPONSE = 'HTTP/1.1 101 <b><font color="red"> WISNU COKRO SATRIO </font></b>\r\n\r\nContent-Length: 104857600000\r\n\r\n'
 class Server(threading.Thread):
     def __init__(self, host, port):
@@ -86,7 +85,6 @@ class ConnectionHandler(threading.Thread):
         self.client_buffer = ''
         self.server = server
         self.log = 'Connection: ' + str(addr)
-
     def close(self):
         try:
             if not self.clientClosed:
@@ -96,7 +94,6 @@ class ConnectionHandler(threading.Thread):
             pass
         finally:
             self.clientClosed = True
-
         try:
             if not self.targetClosed:
                 self.target.shutdown(socket.SHUT_RDWR)
@@ -105,24 +102,17 @@ class ConnectionHandler(threading.Thread):
             pass
         finally:
             self.targetClosed = True
-
     def run(self):
         try:
             self.client_buffer = self.client.recv(BUFLEN)
-
             hostPort = self.findHeader(self.client_buffer, 'X-Real-Host')
-
             if hostPort == '':
                 hostPort = DEFAULT_HOST
-
             split = self.findHeader(self.client_buffer, 'X-Split')
-
             if split != '':
                 self.client.recv(BUFLEN)
-
             if hostPort != '':
                 passwd = self.findHeader(self.client_buffer, 'X-Pass')
-				
                 if len(PASS) != 0 and passwd == PASS:
                     self.method_CONNECT(hostPort)
                 elif len(PASS) != 0 and passwd != PASS:
@@ -134,7 +124,6 @@ class ConnectionHandler(threading.Thread):
             else:
                 print '- No X-Real-Host!'
                 self.client.send('HTTP/1.1 400 NoXRealHost!\r\n\r\n')
-
         except Exception as e:
             self.log += ' - error: ' + e.strerror
             self.server.printLog(self.log)
@@ -142,22 +131,16 @@ class ConnectionHandler(threading.Thread):
         finally:
             self.close()
             self.server.removeConn(self)
-
     def findHeader(self, head, header):
         aux = head.find(header + ': ')
-
         if aux == -1:
             return ''
-
         aux = head.find(':', aux)
         head = head[aux+2:]
         aux = head.find('\r\n')
-
         if aux == -1:
             return ''
-
         return head[:aux];
-
     def connect_target(self, host):
         i = host.find(':')
         if i != -1:
@@ -167,19 +150,11 @@ class ConnectionHandler(threading.Thread):
             if self.method=='CONNECT':
                 port = 443
             else:
-                port = 80
-                port = 4000
-                port = 5000
-                port = 3128
-                port = 8080
                 port = sys.argv[1]
-
         (soc_family, soc_type, proto, _, address) = socket.getaddrinfo(host, port)[0]
-
         self.target = socket.socket(soc_family, soc_type, proto)
         self.targetClosed = False
         self.target.connect(address)
-
     def method_CONNECT(self, path):
         self.log += ' - CONNECT ' + path
 
@@ -189,7 +164,6 @@ class ConnectionHandler(threading.Thread):
 
         self.server.printLog(self.log)
         self.doCONNECT()
-
     def doCONNECT(self):
         socs = [self.client, self.target]
         count = 0
@@ -210,7 +184,6 @@ class ConnectionHandler(threading.Thread):
                                 while data:
                                     byte = self.target.send(data)
                                     data = data[byte:]
-
                             count = 0
 			else:
 			    break
@@ -229,7 +202,6 @@ def print_usage():
 def parse_args(argv):
     global LISTENING_ADDR
     global LISTENING_PORT
-    
     try:
         opts, args = getopt.getopt(argv,"hb:p:",["bind=","port="])
     except getopt.GetoptError:
