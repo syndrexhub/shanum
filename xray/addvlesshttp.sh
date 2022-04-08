@@ -19,7 +19,7 @@ domain=$(cat /etc/xray/domain)
 vlhttp="$(cat ~/log-install.txt | grep -w "VLESS HTTP" | cut -d: -f2|sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 		read -rp "Username : " -e user
-		CLIENT_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
+		CLIENT_EXISTS=$(grep -w $user /etc/xray/xtrojan.json | wc -l)
 
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
 			echo ""
@@ -32,9 +32,9 @@ read -p "Expired (Days) : " masaaktif
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#vless-http$/a\#### '"$user $exp"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/xtrojan.json
 vlesshttp="vless://${uuid}@${domain}:$vlhttp?type=tcp&security=tls&path=gandring&encryption=none#${user}"
-
+systemctl restart xtrojan.service
 systemctl restart xray.service
 #systemctl restart v2ray@.service
 service cron restart
