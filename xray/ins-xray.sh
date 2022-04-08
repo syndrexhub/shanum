@@ -616,44 +616,6 @@ cat > /etc/xray/config.json << END
       "domain": "${domain}"
     },
     {
-      "port": 2083,
-      "protocol": "socks",
-      "settings": {
-        "auth": "password",
-        "accounts": [
-          {
-            "user": "gandring",
-            "pass": "g"
-#xray-socksws
-          }
-        ],
-        "udp": true
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/etc/xray/xray.crt",
-              "keyFile": "/etc/xray/xray.key"
-            }
-          ]
-        },
-        "tcpSettings": {},
-        "kcpSettings": {},
-        "grpcSettings": {},
-        "httpSettings": {},
-        "quicSettings": {},
-        "wsSettings": {
-          "path": "gandring",
-          "headers": {
-            "Host": "${domain}"
-        }
-      },
-      "domain": "${domain}"
-    },
-    {
       "port": 660,
       "protocol": "trojan",
       "settings": {
@@ -849,63 +811,6 @@ cat > /etc/xray/xtrojan.json << END
         },
         "grpcSettings": {
           "serviceName": "gandring"
-        }
-      }
-    },
-    {
-      "port": 2022,
-      "listen": "0.0.0.0",
-      "tag": "vless-http-in",
-      "protocol": "vless",
-      "settings": {
-        "clients": [
-          {
-            "id": "gandring"
-            "email": "gandring@p0x.smule.my.id"
-#vless-http
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "tcp",
-        "tcpSettings": {
-          "header": {
-            "type": "http",
-            "response": {
-              "version": "1.1",
-              "status": "200",
-              "reason": "OK",
-              "headers": {
-                "Content-Type": [
-                  "application/octet-stream",
-                  "video/mpeg",
-                  "application/x-msdownload",
-                  "text/html",
-                  "application/x-shockwave-flash"
-                ],
-                "Transfer-Encoding": [
-                  "chunked"
-                ],
-                "Connection": [
-                  "keep-alive"
-                ],
-                "Pragma": "no-cache"
-              }
-            }
-          }
-        },
-        "security": "tls"
-         "tlsSettings": {
-          "alpn": [
-            "h2",
-            "http/1.1"
-          ],
-          "certificates": [
-            {
-              "certificateFile": "/etc/xray/xray.crt",
-              "keyFile": "/etc/xray/xray.key"
-            }
-          ]
         }
       }
     },
