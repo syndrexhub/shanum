@@ -236,7 +236,7 @@ sed -i $MYIP2 /etc/squid/squid.conf
 
 # Install SSLH
 apt -y install sslh
-rm -f /etc/default/sslh
+rm -f /etc/init.d/sslh
 # Settings SSLH
 cat > /etc/default/sslh <<-END
 # Default options for sslh initscript
@@ -309,7 +309,7 @@ chmod +x configure
 make
 make install
 cd /root
-rm -r -f stunnel
+rm -f stunnel5
 rm -f stunnel5.zip
 mkdir -p /etc/stunnel5
 chmod 644 /etc/stunnel5
@@ -347,10 +347,10 @@ connect = 127.0.0.1:1194
 END
 
 #make a certificate
-#openssl genrsa -out key.pem 4096
-#openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
-#-subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
-cat $cert.pem $key.pem >> /etc/stunnel5/stunnel5.pem
+openssl genrsa -out key.pem 2048
+openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
+-subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
+cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
 
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
@@ -373,10 +373,10 @@ wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
 
 # Ubah Izin Akses
 cd
-cert=/etc/stunnel5/stunel5.pem
+cert = /etc/stunnel5/stunel5.pem
 chmod 600 /etc/stunnel5/stunnel5.pem
 chmod +x /etc/init.d/stunnel5
-cp /usr/local/bin/stunnel /usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
+cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
 
 # Remove File
 rm -rf /usr/local/share/doc/stunnel/
