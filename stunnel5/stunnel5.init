@@ -21,7 +21,12 @@ DAEMON=/usr/local/bin/stunnel4
 NAME=stunnel4
 DESC="STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING"
 OPTIONS=""
-
+ENABLED=1
+FILES="/etc/stunnel/*.conf"
+OPTIONS=""
+BANNER="/etc/issue.net"
+PPP_RESTART=0
+RLIMITS="-n 4096 -d unlimited"
 get_opt() {
   sed -e "s;^[[:space:]]*;;" -e "s;[[:space:]]*$;;" \
     -e "s;[[:space:]]*=[[:space:]]*;=;" "$1" |
