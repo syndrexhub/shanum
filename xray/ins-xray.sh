@@ -506,7 +506,6 @@ cat > /etc/xray/config.json << END
       "settings": {
         "method": "chacha20-poly1305",
         "password": "gandring",
-#xray-ss
         "network": "tcp,udp"
       },
       "sniffing": {
