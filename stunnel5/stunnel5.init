@@ -43,9 +43,9 @@ get_pidfile() {
 startdaemons() {
   local res file args pidfile warn status
 
-  if ! [ -d /var/run/stunnel ]; then
-    rm -rf /var/run/stunnel
-    install -d -o stunnel -g stunnel /var/run/stunnel
+  if ! [ -d /var/run/stunnel.pid ]; then
+    rm -rf /var/run/stunnel.pid
+    install -d -o stunnel -g stunnel /var/run/stunnel.pid
   fi
   if [ -n "$RLIMITS" ]; then
     ulimit $RLIMITS
@@ -185,7 +185,7 @@ if [ -n "${2:-}" ]; then
   fi
 else
   if [ -z "$FILES" ]; then
-    FILES="/etc/stunnel5/*.conf"
+    FILES="/etc/stunnel5/stunnel5.conf"
   fi
 fi
 
