@@ -16,9 +16,9 @@
 
 . /lib/lsb/init-functions
 
-DEFAULTPIDFILE="/var/run/stunnel.pid"
-DAEMON=/usr/local/bin/stunnel5
-NAME=stunnel5
+DEFAULTPIDFILE="/var/run/stunnel4.pid"
+DAEMON=/usr/local/bin/stunnel4
+NAME=stunnel4
 DESC="STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING"
 OPTIONS=""
 
@@ -43,9 +43,9 @@ get_pidfile() {
 startdaemons() {
   local res file args pidfile warn status
 
-  if ! [ -d /var/run/stunnel.pid ]; then
-    rm -rf /var/run/stunnel.pid
-    install -d -o stunnel -g stunnel /var/run/stunnel.pid
+  if ! [ -d /var/run/stunnel4.pid ]; then
+    rm -rf /var/run/stunnel4.pid
+    install -d -o stunnel -g stunnel /var/run/stunnel4.pid
   fi
   if [ -n "$RLIMITS" ]; then
     ulimit $RLIMITS
@@ -180,12 +180,12 @@ fi
 # is in $2. Otherwise, respect /usr/local/etc/default/stunnel4 setting.
 # If no setting there, use /usr/local/etc/stunnel/*.conf.
 if [ -n "${2:-}" ]; then
-  if [ -e "/etc/stunnel5/stunnel5.conf" ]; then
-    FILES="/etc/stunnel5/stunnel5.conf"
+  if [ -e "/etc/stunnel4/stunnel4.conf" ]; then
+    FILES="/etc/stunnel4/stunnel4.conf"
   fi
 else
   if [ -z "$FILES" ]; then
-    FILES="/etc/stunnel5/stunnel5.conf"
+    FILES="/etc/stunnel4/stunnel4.conf"
   fi
 fi
 
