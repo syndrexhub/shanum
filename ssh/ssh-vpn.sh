@@ -327,8 +327,8 @@ accept = 800
 connect = 127.0.0.1:22
 
 [openssh]
-accept = 8443
-connect = 127.0.0.1:443
+accept = 500
+connect = 127.0.0.1:8443
 
 [openvpn]
 accept = 990
