@@ -515,7 +515,9 @@ wget -O addgrpctrojan "https://${wisnuvpnn}/addgrpctrojan.sh"
 wget -O addtrojanwss "https://${wisnuvpnn}/addtrojanwss.sh"
 wget -O addtrojanhttp "https://${wisnuvpnn}/addtrojanhttp.sh"
 wget -O addtrojanhdua "https://${wisnuvpnn}/addtrojanhdua.sh"
+wget -O addxrayss "https://${wisnuvpnn}/addxrayss.sh"
 
+wget -O delxrayss "https://${wisnuvpnn}/delxrayss.sh"
 wget -O delvmess "https://${wisnuvpnn}/delvmess.sh"
 wget -O delnewvmess "https://${wisnuvpnn}/delnewvmess.sh"
 wget -O delnewvless "https://${wisnuvpnn}/delnewvless.sh"
@@ -552,7 +554,9 @@ wget -O cekgrpctrojan "https://${wisnuvpnn}/cekgrpctrojan.sh"
 wget -O cektrojanwss "https://${wisnuvpnn}/cektrojanwss.sh"
 wget -O cektrojanhttp "https://${wisnuvpnn}/cektrojanhttp.sh"
 wget -O ceknewtr "https://${wisnuvpnn}/ceknewtr.sh"
+wget -O cekxrayss "https://${wisnuvpnn}/cekxrayss.sh"
 
+wget -O renewxrayss "https://${wisnuvpnn}/renewxrayss.sh"
 wget -O renewvmess "https://${wisnuvpnn}/renewvmess.sh"
 wget -O renewvmessgrpc "https://${wisnuvpnn}/renewvmessgrpc.sh"
 wget -O renewvmesshdua "https://${wisnuvpnn}/renewvmesshdua.sh"
@@ -602,6 +606,7 @@ wget -O testermenu "https://raw.githubusercontent.com/wisnucokrosatrio/shanum/ma
 chmod +x testermenu
 chmod +x ceknewtr
 chmod +x addnewtr
+chmod +x addxrayss
 chmod +x addnewvmess
 chmod +x addnewvless
 chmod +x delnewtr
@@ -679,7 +684,10 @@ chmod +x addgrpctrojan
 chmod +x addtrojanwss
 chmod +x addtrojanhttp
 chmod +x addtrojanhdua
+chmod +x renewxrayss
 
+chmod +x cekxrayss
+chmod +x delxrayss
 chmod +x delvmess
 chmod +x delvmessgrpc
 chmod +x delvmesshdua
