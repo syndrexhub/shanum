@@ -259,10 +259,11 @@ DAEMON=/usr/sbin/sslh
 DAEMON_OPTS="--user sslh --listen 0.0.0.0:8443 --ssh 127.0.0.1:300 --ssl 127.0.0.1:500 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
 
 END
+
 # Service SSLH systemctl restart sslh
 cat > /lib/systemd/system/sslh.service << END
 [Unit]
-Description=SSH MULTIPLEXLER CILEGON BANTEN BY WISNU
+Description=SSH MULTIPLEXLER CILEGON BANTEN BY GANDRING
 After=network.target
 Documentation=http://t.me/zerossl
 
@@ -345,7 +346,7 @@ accept = 990
 connect = 127.0.0.1:1194
 END
 #make a certificate
-openssl genrsa -out key.pem 2048
+openssl genrsa -out key.pem 4096
 openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
 -subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
 cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
@@ -376,12 +377,12 @@ chmod +x /etc/init.d/stunnel5
 cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
 
 # Remove File
-rm -r -f /usr/local/share/doc/stunnel/
-rm -r -f /usr/local/etc/stunnel/
-rm -f /usr/local/bin/stunnel
-rm -f /usr/local/bin/stunnel3
-rm -f /usr/local/bin/stunnel4
-#rm -f /usr/local/bin/stunnel5
+rm -rf /usr/local/share/doc/stunnel/
+rm -rf /usr/local/etc/stunnel/
+rm -rf /usr/local/bin/stunnel
+rm -rf /usr/local/bin/stunnel3
+rm -rf /usr/local/bin/stunnel4
+rm -f /usr/local/bin/stunnel5
 
 # Restart Stunnel 5
 systemctl stop stunnel5
