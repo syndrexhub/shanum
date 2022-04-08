@@ -26,6 +26,14 @@ echo -e "07\e[1;33m) Perpanjang Masa Aktif Akun ShadowsocksR \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "08\e[1;33m) Menu seting ShadowsocksR \e[m"
 echo -e "\033[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "09\e[1;33m) Buat Akun Shadowsocks AEAD \e[m "
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "10\e[1;33m) Hapus Akun Shadowsocks AEAD \e[m "
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "11\e[1;33m) Perpanjang Masa Aktif Akun Shadowsocks AEAD\e[m "
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "12\e[1;33m) Cek User Login Shadowsocks AEAD \e[m  "
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "00\e[1;31m) Menu Utama \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "xx\e[1;31m) Keluar \e[m "
@@ -58,6 +66,18 @@ renewssr
 ;;
 8)
 ssr
+;;
+9)
+addxrayss
+;;
+10)
+delxrayss
+;;
+11)
+renewxrayss
+;;
+12)
+cekxrayss
 ;;
 0)
 clear
