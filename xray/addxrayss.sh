@@ -37,20 +37,19 @@ sed -i '/#xray-ss$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'"' /etc/xray/config.json
 cat>/etc/xray/ss-$user.json<<EOF
       {
-      "port": 44444,
+      "port": 333,
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-poly1305",
         "password": "${user}",
-        #xray-ss
         "network": "tcp,udp"
       }
     },
 EOF
 #vmess_base641=$( base64 -w 0 <<< $shadowsocks_json)
-shadowsocks_base64=$( base64 -w 0 <<< $shadowsocks_json)
+shadowsocks_base64=$(echo -n "chacha20-poly1305:${user}@${MYIP}:$ss" | base64 -w0)
 #vmess1="vmess://$(base64 -w 0 /etc/xray/ss-$user.json)"
-shadowsocks="ss://$(base64 -w 0 /etc/xray/shadowsocks-$user.json)"
+shadowsocks="ss://$shadowsocks_base64"
 
 systemctl restart xray.service
 service cron restart
