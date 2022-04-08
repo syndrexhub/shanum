@@ -51,7 +51,7 @@ sed -i '/#trojan-http$/a\#&# '"$user $exp"'\
 },{"password": "'""$uuid""'","email": "'""$user""'"' /etc/xray/xtrojan.json
 trojanhdua="trojan://${uuid}@${domain}:$thdua?sni=${domain}&type=http&security=tls&path=gandring#${user}"
 trojangrpc="trojan://${uuid}@${domain}:$tgrpc?mode=gun&security=tls&type=grpc&serviceName=gandring&sni=${domain}#${user}"
-trojanxtls="trojan://${user}@${domain}:$txtls/?sni=${domain}&security=tls&flow=xtls-rprx-direct#${user}"
+trojanxtls="trojan://${user}@${domain}:$txtls/?sni=${domain}&security=xtls&flow=xtls-rprx-direct#${user}"
 trojantls="trojan://${uuid}@${domain}:$ttls?type=ws&security=tls&host=$domain&path=%2fgandring&sni=$domain#${user}"
 trojannontls="trojan://${uuid}@${domain}:$tnontls?type=ws&security=none&host=$domain&path=%2fgandring#${user}"
 trojanhttp="trojan://${uuid}@${domain}:$thttp?sni=${domain}&type=tcp&security=none&host=${domain}&headerType=http#${user}"
