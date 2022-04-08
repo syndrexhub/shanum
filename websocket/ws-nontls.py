@@ -9,7 +9,7 @@ LISTENING_PORT = sys.argv[1]
 PASS = ''
 
 # CONST
-BUFLEN = 4096 * 4
+BUFLEN = 2048 * 4
 TIMEOUT = 60
 DEFAULT_HOST = '127.0.0.1:300'
 RESPONSE = 'HTTP/1.1 101 <b><font color="blue"> GANDRING BAGUS SATRIO </font></b>\r\n\r\nContent-Length: 1048576000000\r\n\r\n'
