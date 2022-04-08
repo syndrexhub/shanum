@@ -318,8 +318,8 @@ chmod 644 /etc/stunnel5
 cd
 cert=/etc/stunnel5/stunel5.pem
 cat > /etc/stunnel5/stunnel5.conf <<-END
-#cert.pem= /etc/xray/xray.crt
-#key.pem= /etc/xray/xray.key
+cert.pem = /etc/xray/xray.crt
+key.pem = /etc/xray/xray.key
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
@@ -347,10 +347,10 @@ connect = 127.0.0.1:1194
 END
 
 #make a certificate
-openssl genrsa -out key.pem 4096
-openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
--subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
-cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
+#openssl genrsa -out key.pem 4096
+#openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
+#-subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
+cat $cert.pem $key.pem >> /etc/stunnel5/stunnel5.pem
 
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
