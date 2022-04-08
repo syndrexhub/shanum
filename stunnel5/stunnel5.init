@@ -16,13 +16,16 @@
 
 . /lib/lsb/init-functions
 
-DEFAULTPIDFILE="/var/run/stunnel4.pid"
+DEFAULTPIDFILE="/var/run/stunnel.pid"
+PIDFILE="/var/run/stunnel4.pid"
+pidfile="/var/run/stunnel.pid"
 DAEMON=/usr/local/bin/stunnel4
 NAME=stunnel4
 DESC="STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING"
 OPTIONS=""
 ENABLED=1
-FILES="/etc/stunnel/*.conf"
+FILES="/etc/stunnel4/stunnel4.conf"
+files="/etc/stunnel4/stunnel4.conf"
 OPTIONS=""
 BANNER="/etc/issue.net"
 PPP_RESTART=0
@@ -48,8 +51,8 @@ get_pidfile() {
 startdaemons() {
   local res file args pidfile warn status
 
-  if ! [ -d /var/run/stunnel4.pid ]; then
-    rm -rf /var/run/stunnel4.pid
+  if ! [ -d /var/run/stunnel.pid ]; then
+    rm -rf /var/run/stunnel.pid
     install -d -o stunnel -g stunnel /var/run/stunnel4.pid
   fi
   if [ -n "$RLIMITS" ]; then
