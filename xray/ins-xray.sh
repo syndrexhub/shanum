@@ -139,7 +139,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 880,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -174,8 +174,8 @@ cat > /etc/xray/config.json << END
               "headers": {
                 "Host": "${domain}",
                 "User-Agent": [
-                  "Mozilla/98.0.2 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.73 Safari/537.36",
-                  "Mozilla/98.0.2 (iPhone; CPU iPhone OS 10_0_2 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/53.0.2785.109 Mobile/14A456 Safari/601.1.46"
+                  "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36",
+                  "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_2 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/53.0.2785.109 Mobile/14A456 Safari/601.1.46"
                 ],
                 "Accept-Encoding": [
                   "gzip, deflate"
@@ -291,7 +291,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 2443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -331,7 +331,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 2443,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -376,7 +376,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 2083,
+      "port": 3443,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -422,7 +422,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 2082,
+      "port": 8880,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -457,7 +457,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 443,
+      "port": 8880,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -490,51 +490,6 @@ cat > /etc/xray/config.json << END
         "grpcSettings": {
           "serviceName": "gandring"
         }
-      },
-      "domain": "${domain}",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
-    {
-      "port": 2083,
-      "protocol": "vless",
-      "settings": {
-        "clients": [
-          {
-            "id": "${uuid}"
-#vless-hdua
-          }
-        ],
-        "decryption": "none"
-      },
-      "streamSettings": {
-        "network": "h2",
-        "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/etc/xray/xray.crt",
-              "keyFile": "/etc/xray/xray.key"
-            }
-          ],
-          "alpn": [
-            "http/1.1"
-          ]
-        },
-        "tcpSettings": {},
-        "kcpSettings": {},
-        "wsSettings": {},
-        "httpSettings": {
-          "path": "gandring",
-            "Host": "${domain}"
-          }
-        },
-        "quicSettings": {}
       },
       "domain": "${domain}",
       "sniffing": {
@@ -582,7 +537,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 2083,
+      "port": 8880,
       "protocol": "socks",
       "settings": {
         "auth": "password",
@@ -779,7 +734,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 443,
+      "port": 6443,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-gRPC-in",
@@ -873,7 +828,7 @@ cat > /etc/xray/xtrojan.json << END
       }
     },
     {
-      "port": 443,
+      "port": 3443,
       "listen": "0.0.0.0",
       "protocol": "trojan",
       "tag": "TROJAN-HTTP/2-in",
@@ -1018,7 +973,6 @@ RestartPreventExitStatus=23
 [Install]
 WantedBy=multi-user.target
 END
-
 
 # // Enable & Start Service
 # Accept port Xray
