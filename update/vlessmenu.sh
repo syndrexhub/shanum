@@ -26,21 +26,29 @@ echo -e "07\e[1;33m)  Perpanjang Masa Aktif Akun Vless gRPC \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "08\e[1;33m)  Cek User Login Vless gRPC \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "09\e[1;33m)  Buat Akun Vless XTLS \e[m"
+echo -e "09\e[1;33m)  Buat Akun Vless TCP \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "10\e[1;33m)  Hapus Akun Vless XTLS \e[m"
+echo -e "10\e[1;33m)  Hapus Akun Vless TCP \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "11\e[1;33m)  Perpanjang Masa Aktif Akun Vless XTLS \e[m"
+echo -e "11\e[1;33m)  Perpanjang Masa Aktif Akun Vless TCP \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "12\e[1;33m)  Cek User Login Vless XTLS \e[m"
+echo -e "12\e[1;33m)  Cek User Login Vless TCP \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "13\e[1;33m)  Buat Akun VLESS HTTP/2 \e[m"
+echo -e "13\e[1;33m)  Buat Akun VLESS H2C \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "14\e[1;33m)  Hapus Akun VLESS HTTP/2 \e[m"
+echo -e "14\e[1;33m)  Hapus Akun VLESS H2C \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "15\e[1;33m)  Perpanjang Masa Aktif Akun VLESS HTTP/2 \e[m"
+echo -e "15\e[1;33m)  Perpanjang Masa Aktif Akun VLESS H2C \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "16\e[1;33m)  Cek User Login VLESS HTTP/2 \e[m"
+echo -e "16\e[1;33m)  Cek User Login VLESS H2C \e[m"
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "17\e[1;33m)  Buat Akun VLESS HTTP \e[m"
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "18\e[1;33m)  Hapus Akun VLESS HTTP \e[m"
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "19\e[1;33m)  Perpanjang Masa Aktif Akun VLESS HTTP \e[m"
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "20\e[1;33m)  Cek User Login VLESS HTTP \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "00\e[1;31m)  Menu Utama \e[m"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -98,6 +106,18 @@ renewvlesshdua
 ;;
 16)
 cekvlesshdua
+;;
+17)
+addvlesshttp
+;;
+18)
+delvlesshttp
+;;
+19)
+renewvlesshttp
+;;
+20)
+cekvlesshttp
 ;;
 0)
 clear
