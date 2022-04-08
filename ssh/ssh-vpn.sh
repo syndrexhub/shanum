@@ -299,25 +299,10 @@ systemctl enable vnstat
 rm -f /root/vnstat-2.6.tar.gz
 rm -rf /root/vnstat-2.6
 
-# install stunnel 5 
-cd /root/
-wget -q -O stunnel5.zip "https://${wisnuvpnnnn}/stunnel5.zip"
-unzip -o stunnel5.zip
-cd /root/stunnel
-chmod +x configure
-./configure
-make
-make install
-cd /root
-rm -f stunnel5
-rm -f stunnel5.zip
-mkdir -p /etc/stunnel5
-chmod 644 /etc/stunnel5
-
 # Download Config Stunnel5
-cd
+apt install stunnel4 -y
 cert=/etc/stunnel5/stunel5.pem
-cat > /etc/stunnel5/stunnel5.conf <<-END
+cat > /etc/stunnel/stunnel.conf <<-END
 #cert.pem = /etc/xray/xray.crt
 #key.pem = /etc/xray/xray.key
 client = no
@@ -350,18 +335,18 @@ END
 openssl genrsa -out key.pem 2048
 openssl req -new -x509 -key key.pem -out cert.pem -days 3650 \
 -subj "/C=ID/ST=Jawa-Tengah/L=Sukoharjo/O=gandringVPN/OU=gandring/CN=gandring/email=djarumpentol01@gmail.com"
-cat cert.pem key.pem >> /etc/stunnel5/stunnel5.pem
+cat cert.pem key.pem >> /etc/stunnel/stunnel.pem
 
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
 [Unit]
 Description=STUNNEL5 ROUTING GAJAH DEMAK BY GANDRING
-Documentation=https://stunnel5.org
+Documentation=https://stunnel.org
 Documentation=https://t.me/zerossl
 After=syslog.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/stunnel -config /etc/stunnel5/stunnel5.conf
+ExecStart=/usr/local/bin/stunnel -config /etc/stunnel/stunnel4.conf
 Type=forking
 
 [Install]
@@ -369,31 +354,31 @@ WantedBy=multi-user.target
 END
 
 # Service Stunnel5 /etc/init.d/stunnel5
-wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
+#wget -q -O /etc/init.d/stunnel5 "https://${wisnuvpnnnn}/stunnel5.init"
 
 # Ubah Izin Akses
 cd
-cert = /etc/stunnel5/stunel5.pem
-chmod 600 /etc/stunnel5/stunnel5.pem
-chmod +x /etc/init.d/stunnel5
-cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
+cert = /etc/stunnel/stunel4.pem
+chmod 600 /etc/stunnel/stunnel4.pem
+chmod +x /etc/init.d/stunnel4
+cp /usr/local/bin/stunnel /usr/local/bin/stunnel4
 
 # Remove File
 rm -rf /usr/local/share/doc/stunnel/
 rm -rf /usr/local/etc/stunnel/
 rm -rf /usr/local/bin/stunnel
 rm -rf /usr/local/bin/stunnel3
-rm -rf /usr/local/bin/stunnel4
-rm -f /usr/local/bin/stunnel5
+rm -f /usr/local/bin/stunnel4
+rm -rf /usr/local/bin/stunnel5
 
 # Restart Stunnel 5
-systemctl stop stunnel5
-systemctl enable stunnel5
-systemctl start stunnel5
-systemctl restart stunnel5
-/etc/init.d/stunnel5 restart
-/etc/init.d/stunnel5 status
-/etc/init.d/stunnel5 restart
+systemctl stop stunnel4
+systemctl enable stunnel4
+systemctl start stunnel4
+systemctl restart stunnel4
+/etc/init.d/stunnel4 restart
+/etc/init.d/stunnel4 status
+/etc/init.d/stunnel4 restart
 
 #OpenVPN
 wget https://${wisnuvpn}/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
@@ -764,7 +749,7 @@ chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/dropbear restart
 /etc/init.d/fail2ban restart
 /etc/init.d/sslh restart
-/etc/init.d/stunnel5 restart
+/etc/init.d/stunnel4 restart
 /etc/init.d/vnstat restart
 #/etc/init.d/fail2ban restart
 #/etc/init.d/squid restart
