@@ -571,6 +571,44 @@ cat > /etc/xray/config.json << END
       "domain": "${domain}"
     },
     {
+      "port": 2083,
+      "protocol": "socks",
+      "settings": {
+        "auth": "password",
+        "accounts": [
+          {
+            "user": "gandring",
+            "pass": "g"
+#xray-socksws
+          }
+        ],
+        "udp": true
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.crt",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ]
+        },
+        "tcpSettings": {},
+        "kcpSettings": {},
+        "grpcSettings": {},
+        "httpSettings": {},
+        "quicSettings": {},
+        "wsSettings": {
+          "path": "gandring",
+          "headers": {
+            "Host": "${domain}"
+        }
+      },
+      "domain": "${domain}"
+    },
+    {
       "port": 660,
       "protocol": "trojan",
       "settings": {
